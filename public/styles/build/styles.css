@@ -21650,8 +21650,8 @@ video {
 
 .form-input {
   --text-opacity: 1;
-  color: #f7fafc;
-  color: rgba(247, 250, 252, var(--text-opacity));
+  color: #2d3748;
+  color: rgba(45, 55, 72, var(--text-opacity));
   margin-bottom: 1rem;
 }
 

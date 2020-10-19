@@ -51,13 +51,16 @@ async function createRecipe(req, res) {
 
     // TEST - adding recipeID to req.user
     // adds the newRecipe id to the user's recipes
+    // REFACTOR: THIS DON'T WORK
     await req.user.recipes.push(newRecipe.id).save()
     // FLASH SUCCESS MESSAGE
+
     return res.redirect(`/recipes/${newRecipe.id}`)
+    // res.send(newRecipe)
 
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
-    res.send(error)
+    res.send({ error })
   }
 }
 async function removeRecipe(req, res) {
@@ -86,15 +89,16 @@ async function removeRecipe(req, res) {
   }
 }
 
-function editRecipe(req, res) {
-
+async function editRecipe(req, res) {
+  const recipe = await getRecipeById(req)
+  res.render('recipes/edit', { recipe })
 }
 
 async function changeRecipe(req, res) {
   try {
     const updatedRecipe = await updateRecipe(req)
     // FLASH UPDATED MESSAGE
-    return res.redirect(`/recipes/${updatedRecipe}`)
+    return res.redirect(`/recipes/${updatedRecipe.id}`)
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
     res.send(error)

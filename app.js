@@ -7,6 +7,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/users_routes');
+const recipeRoutes = require('./routes/recipe_routes')
 const exphbs = require('express-handlebars')
 // allows handlebars to reference properties of prototyped db objects/documents
 const Handlebars = require('handlebars')
@@ -78,6 +79,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/users', userRoutes)
+app.use('/recipes', recipeRoutes)
 
 app.use((req, res) => {
   res.status(404).send({

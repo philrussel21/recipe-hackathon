@@ -8,24 +8,24 @@ const {
   removeRecipe,
   editRecipe,
   changeRecipe
-} = require('../controllers/AllRecipes');
+} = require('../controllers/recipes_controller');
 
 // Returns all recipes
 router.get('/', getAllRecipes);
 
+// Creates a new recipe
+router.get('/new', newRecipe)
+router.post('/', createRecipe);
+
 // Returns one recipe with given id
 router.get('/:id', getRecipe);
 
-// Creates a new recipe
-router.get('/add', newRecipe)
-router.post('/add', createRecipe);
-
 // Updates a recipe with given id
 // EDIT ROUTE TO MAKE CHANGES
-router.get('/:id', editRecipe)
+router.get('/:id/edit', editRecipe)
 router.put('/:id', changeRecipe);
 
 // Deletes a recipe with given id
 router.delete('/:id', removeRecipe);
 
-modules.exports = router
+module.exports = router
