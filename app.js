@@ -1,8 +1,14 @@
+// Don't forget to load the env variables in heroku CLI
+// when deploying
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/users_routes');
 const exphbs = require('express-handlebars')
+// allows handlebars to reference properties of prototyped db objects/documents
 const Handlebars = require('handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 
@@ -16,7 +22,7 @@ const initPassport = require('./config/passport')
 initPassport(passport)
 const MongoStore = require('connect-mongo')(session)
 app.use(session({
-  secret: 'hackathon', // .env
+  secret: process.env.SECRET_SESSION, // .env
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -28,7 +34,7 @@ app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 
-
+// uses the host-issued port if live
 const port = process.env.PORT || 3000
 
 const dbConnection = 'mongodb://localhost/recipes'
@@ -48,6 +54,9 @@ mongoose.connect(dbConnection, {
 const server = app.listen(port, () => {
   console.log('listening on port:' + port)
 })
+
+// access public dir for stylesheets and scripts
+app.use(express.static('public'))
 
 // gives access to req.body
 app.use(express.urlencoded({ extended: false }))

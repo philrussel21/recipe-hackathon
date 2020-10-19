@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "app.js",
 	"scripts": {
+		"build": "npx tailwind build ./public/styles/styles.css -o ./public/styles/build/styles.css",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "nodemon"
 	},
@@ -20,7 +21,9 @@
 	"homepage": "https://github.com/philrussel21/recipe-hackathon#readme",
 	"dependencies": {
 		"@handlebars/allow-prototype-access": "^1.0.3",
+		"autoprefixer": "^10.0.1",
 		"connect-mongo": "^3.2.0",
+		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"express-flash": "0.0.2",
 		"express-handlebars": "^5.1.0",
@@ -28,7 +31,9 @@
 		"mongoose": "^5.10.9",
 		"mongoose-bcrypt": "^1.9.0",
 		"passport": "^0.4.1",
-		"passport-local": "^1.0.0"
+		"passport-local": "^1.0.0",
+		"postcss-cli": "^8.1.0",
+		"tailwindcss": "^1.9.4"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.5"
