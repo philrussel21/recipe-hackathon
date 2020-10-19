@@ -17,7 +17,12 @@ const User = new Schema({
   },
   intro: {
     type: String
-  }
+  },
+  // Reference using ID to link users to recipes
+  // recipes: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Recipes'
+  // }]
 })
 
 User.index({ 'email': 1 })
