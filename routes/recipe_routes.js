@@ -21,7 +21,6 @@ router.post('/', createRecipe);
 router.get('/:id', getRecipe);
 
 // Updates a recipe with given id
-// EDIT ROUTE TO MAKE CHANGES
 router.get('/:id/edit', editRecipe)
 router.put('/:id', changeRecipe);
 

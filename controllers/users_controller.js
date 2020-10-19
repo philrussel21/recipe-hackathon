@@ -39,4 +39,5 @@ function getUserProfile(req, res) {
 }
 
 
+
 module.exports = { getUser, postUser, getRegister, addUser, getUserProfile }

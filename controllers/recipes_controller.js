@@ -1,4 +1,3 @@
-const User = require('../models/user');
 const {
   allRecipes,
   getRecipeById,
@@ -48,15 +47,7 @@ async function createRecipe(req, res) {
   try {
     // creates a new document in the recipe db
     const newRecipe = await addRecipe(req).save()
-
-    // TEST - adding recipeID to req.user
-    // adds the newRecipe id to the user's recipes
-    // REFACTOR: THIS DON'T WORK
-    await req.user.recipes.push(newRecipe.id).save()
-    // FLASH SUCCESS MESSAGE
-
     return res.redirect(`/recipes/${newRecipe.id}`)
-    // res.send(newRecipe)
 
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
@@ -65,15 +56,6 @@ async function createRecipe(req, res) {
 }
 async function removeRecipe(req, res) {
   try {
-    // removes the deletedRecipe from the user recipes array.
-    const userRecipes = req.user.recipes
-    const recipeIdx = userRecipes.indexOf(req.params.id)
-    if (recipeIdx > -1) {
-      userRecipes.splice(recipeIdx, 1)
-    } else {
-      throw Error("Recipe ID not under user")
-    }
-
     await destroyRecipe(req)
     res.send({
       // responds back to the FE with JSON obj that has the route
