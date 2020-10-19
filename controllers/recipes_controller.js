@@ -11,7 +11,7 @@ async function getAllRecipes(req, res) {
   try {
     const recipes = await allRecipes()
 
-    // res.render('recipes/index', { recipes })
+    res.render('recipes/index', { recipes })
   } catch (error) {
     res.status(500).send({
       message: "Something went wrong with the server",
@@ -30,7 +30,7 @@ async function getRecipe(req, res) {
       res.status(404).render('404', { error: req.flash('error') })
     } else {
 
-      // res.render('recipes/show', { recipe })
+      res.render('recipes/show', { recipe })
     }
   } catch (error) {
     res.status(500).send({
@@ -41,8 +41,9 @@ async function getRecipe(req, res) {
 }
 
 function newRecipe(req, res) {
-  // return res.render('/add')
+  return res.render('recipes/add')
 }
+
 async function createRecipe(req, res) {
   try {
     // creates a new document in the recipe db
@@ -52,7 +53,7 @@ async function createRecipe(req, res) {
     // adds the newRecipe id to the user's recipes
     await req.user.recipes.push(newRecipe.id).save()
     // FLASH SUCCESS MESSAGE
-    // return res.redirect(`/recipes/${newRecipe.id}`)
+    return res.redirect(`/recipes/${newRecipe.id}`)
 
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
@@ -76,6 +77,7 @@ async function removeRecipe(req, res) {
       // where to redirect after deleting a comment.
       // not sure if we can change to something or use a plain res.redirect?
       redirect: '/recipes'
+      // window.location = res.redirect
     })
 
   } catch (error) {
@@ -84,11 +86,15 @@ async function removeRecipe(req, res) {
   }
 }
 
+function editRecipe(req, res) {
+
+}
+
 async function changeRecipe(req, res) {
   try {
     const updatedRecipe = await updateRecipe(req)
     // FLASH UPDATED MESSAGE
-    // return res.redirect(`/recipes/${updatedRecipe}`)
+    return res.redirect(`/recipes/${updatedRecipe}`)
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
     res.send(error)
@@ -100,6 +106,7 @@ module.exports = {
   getRecipe,
   newRecipe,
   createRecipe,
+  editRecipe,
   removeRecipe,
   changeRecipe
 }

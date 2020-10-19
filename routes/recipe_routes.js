@@ -6,6 +6,7 @@ const {
   newRecipe,
   createRecipe,
   removeRecipe,
+  editRecipe,
   changeRecipe
 } = require('../controllers/AllRecipes');
 
@@ -21,6 +22,7 @@ router.post('/add', createRecipe);
 
 // Updates a recipe with given id
 // EDIT ROUTE TO MAKE CHANGES
+router.get('/:id', editRecipe)
 router.put('/:id', changeRecipe);
 
 // Deletes a recipe with given id
