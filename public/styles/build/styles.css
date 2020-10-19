@@ -21665,6 +21665,21 @@ video {
   font-size: 1.5rem;
 }
 
+.ingredient-items {
+  --text-opacity: 1;
+  color: #f7fafc;
+  color: rgba(247, 250, 252, var(--text-opacity));
+  margin: 0.25rem;
+}
+
+.recipe-form-panel {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16rem;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

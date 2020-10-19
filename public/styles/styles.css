@@ -14,3 +14,9 @@
 .nav-items {
 	@apply text-2xl;
 }
+.ingredient-items {
+	@apply text-gray-100 m-1;
+}
+.recipe-form-panel {
+	@apply h-screen flex flex-col items-center pt-64;
+}

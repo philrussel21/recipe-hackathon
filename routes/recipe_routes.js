@@ -1,5 +1,5 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 const {
   getAllRecipes,
   getRecipe,
@@ -25,6 +25,6 @@ router.get('/:id/edit', editRecipe)
 router.put('/:id', changeRecipe);
 
 // Deletes a recipe with given id
-router.delete('/:id', removeRecipe);
+router.delete("/:id", removeRecipe);
 
-module.exports = router
+module.exports = router;
