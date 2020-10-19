@@ -6,11 +6,17 @@
   @apply flex flex-col p-4 h-auto w-64 border-2 m-4;
 }
 .form-input {
-  @apply text-gray-100 mb-4;
+  @apply text-gray-800 mb-4;
 }
 .form-label {
   @apply text-gray-100;
 }
 .nav-items {
   @apply text-2xl;
+}
+.ingredient-items {
+  @apply text-gray-100 m-1;
+}
+.recipe-form-panel {
+  @apply h-screen flex flex-col items-center pt-64;
 }

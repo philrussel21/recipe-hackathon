@@ -1,103 +1,98 @@
-const User = require('../models/user');
+const User = require("../models/user");
 const {
   allRecipes,
   getRecipeById,
   addRecipe,
   updateRecipe,
-  destroyRecipe
-} = require('../utils/recipes');
+  destroyRecipe,
+} = require("../utils/recipes");
 
 async function getAllRecipes(req, res) {
   try {
-    const recipes = await allRecipes()
-
-    res.render('recipes/index', { recipes })
+    const recipes = await allRecipes();
+    console.log(recipes);
+    res.render("recipes/index", { recipes });
   } catch (error) {
     res.status(500).send({
       message: "Something went wrong with the server",
-      error
-    })
+      error,
+    });
   }
-
 }
 
 async function getRecipe(req, res) {
   try {
-    const recipe = await getRecipeById(req)
+    const recipe = await getRecipeById(req);
     // no document found
     if (!recipe) {
-      req.flash('error', "Error: Cannot find recipe")
-      res.status(404).render('404', { error: req.flash('error') })
+      req.flash("error", "Error: Cannot find recipe");
+      res.status(404).render("404", { error: req.flash("error") });
     } else {
-
-      res.render('recipes/show', { recipe })
+      res.render("recipes/show", { recipe, user: req.user });
     }
   } catch (error) {
     res.status(500).send({
       message: "Something went wrong with the server",
-      error
-    })
+      error,
+    });
   }
 }
 
 function newRecipe(req, res) {
-  return res.render('recipes/add')
+  return res.render("recipes/add");
 }
 
 async function createRecipe(req, res) {
+  console.log(req.body);
   try {
     // creates a new document in the recipe db
-    const newRecipe = await addRecipe(req).save()
-
+    const newRecipe = await addRecipe(req).save();
+    console.log(newRecipe);
     // TEST - adding recipeID to req.user
     // adds the newRecipe id to the user's recipes
-    await req.user.recipes.push(newRecipe.id).save()
+    // await req.user.recipes.push(newRecipe.id).save();
     // FLASH SUCCESS MESSAGE
-    return res.redirect(`/recipes/${newRecipe.id}`)
-
+    return res.redirect(`/recipes/${newRecipe.id}`);
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
-    res.send(error)
+    res.send({ error: "Wrong" });
   }
 }
 async function removeRecipe(req, res) {
   try {
     // removes the deletedRecipe from the user recipes array.
-    const userRecipes = req.user.recipes
-    const recipeIdx = userRecipes.indexOf(req.params.id)
+    const userRecipes = req.user.recipes;
+    const recipeIdx = userRecipes.indexOf(req.params.id);
     if (recipeIdx > -1) {
-      userRecipes.splice(recipeIdx, 1)
+      userRecipes.splice(recipeIdx, 1);
     } else {
-      throw Error("Recipe ID not under user")
+      throw Error("Recipe ID not under user");
     }
 
-    await destroyRecipe(req)
+    await destroyRecipe(req);
     res.send({
       // responds back to the FE with JSON obj that has the route
       // where to redirect after deleting a comment.
       // not sure if we can change to something or use a plain res.redirect?
-      redirect: '/recipes'
+      redirect: "/recipes",
       // window.location = res.redirect
-    })
-
+    });
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
-    res.send(error)
+    res.send(error);
   }
 }
 
-function editRecipe(req, res) {
-
-}
+function editRecipe(req, res) {}
 
 async function changeRecipe(req, res) {
   try {
-    const updatedRecipe = await updateRecipe(req)
+    const updatedRecipe = await updateRecipe(req);
     // FLASH UPDATED MESSAGE
-    return res.redirect(`/recipes/${updatedRecipe}`)
+    return res.redirect(`/recipes/${updatedRecipe.id}`);
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
-    res.send(error)
+    res.send(error);
   }
 }
 
@@ -108,5 +103,5 @@ module.exports = {
   createRecipe,
   editRecipe,
   removeRecipe,
-  changeRecipe
-}
+  changeRecipe,
+};

@@ -21650,8 +21650,8 @@ video {
 
 .form-input {
   --text-opacity: 1;
-  color: #f7fafc;
-  color: rgba(247, 250, 252, var(--text-opacity));
+  color: #2d3748;
+  color: rgba(45, 55, 72, var(--text-opacity));
   margin-bottom: 1rem;
 }
 
@@ -21663,6 +21663,21 @@ video {
 
 .nav-items {
   font-size: 1.5rem;
+}
+
+.ingredient-items {
+  --text-opacity: 1;
+  color: #f7fafc;
+  color: rgba(247, 250, 252, var(--text-opacity));
+  margin: 0.25rem;
+}
+
+.recipe-form-panel {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16rem;
 }
 
 @media (min-width: 640px) {

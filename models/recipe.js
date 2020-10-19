@@ -29,15 +29,15 @@ const Recipe = new Schema({
     required: true
   },
   tags: {
-    type: [String],
+    type: String,
     required: true,
   },
   steps: {
-    type: [String],
+    type: String,
     required: true
   },
   ingredients: {
-    type: [String],
+    type: String,
     required: true
   },
   // Reference using user id to link recipe
