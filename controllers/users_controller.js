@@ -34,10 +34,49 @@ async function addUser(req, res) {
   }
 }
 
-function getUserProfile(req, res) {
+async function getUserProfile(req, res) {
+  const userEmail = req.params.email
+  try {
+    const user = await User.findOne({ email: userEmail })
+    if (!user) {
+      req.flash('error', "User not found")
+      return res.status(404).render('404', { error: req.flash('error') })
+    } else {
 
+      res.render('users/show', { user })
+    }
+
+  } catch (error) {
+    res.status(500).send({ message: error })
+  }
+}
+
+async function editProfile(req, res) {
+  const userEmail = req.params.email
+  try {
+    const user = await User.findOne({ email: userEmail })
+    if (!user) {
+      req.flash('error', "User not found")
+      return res.status(404).render('404', { error: req.flash('error') })
+    } else {
+
+      return res.render('users/edit', { user })
+    }
+  } catch (error) {
+    res.status(500).send({ message: error })
+  }
+}
+
+async function updateProfile(req, res) {
+  try {
+    const userEmail = req.params.email
+    const updatedUser = await User.findOneAndUpdate({ email: userEmail }, req.body, { new: true })
+    return res.redirect(`/users/${userEmail}`)
+  } catch (error) {
+    res.status(500).send({ message: error })
+  }
 }
 
 
 
-module.exports = { getUser, postUser, getRegister, addUser, getUserProfile }
+module.exports = { getUser, postUser, getRegister, addUser, getUserProfile, editProfile, updateProfile }

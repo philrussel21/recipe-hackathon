@@ -72,8 +72,17 @@ async function removeRecipe(req, res) {
 }
 
 async function editRecipe(req, res) {
-  const recipe = await getRecipeById(req)
-  res.render('recipes/edit', { recipe })
+  try {
+    const recipe = await getRecipeById(req)
+    if (!recipe) {
+      req.flash('error', "Recipe not found")
+      res.status(404).render('404', { error: req.flash('error') })
+    } else {
+      return res.render('recipes/edit', { recipe })
+    }
+  } catch (error) {
+    res.status(500).send(error)
+  }
 }
 
 async function changeRecipe(req, res) {
