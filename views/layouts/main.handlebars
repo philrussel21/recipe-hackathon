@@ -1,13 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/build/styles.css">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/build/styles.css" />
+    <title>Hackathon</title>
+  </head>
 
-    {{{body}}}
-</body>
+  <body class="h-screen">
+    <div
+      class="flex flex-col h-screen justify-between bg-gray-600 items-center"
+    >
+      <header class="flex justify-center h-24 w-full">
+        <nav class="flex flex-row justify-between w-9/12">
+          <div
+            class="left-nav flex flex-row justify-evenly items-center w-3/12 h-full"
+          >
+            <a class="nav-items" href="/">Hackathon</a>
+          </div>
+          <div
+            class="mid-nav w-6/12 h-full flex flex-row justify-end items-center pr-4"
+          >
+            <img
+              id="search-icon"
+              class="cursor-pointer"
+              src="/icons/search.svg"
+              alt="Search Icon"
+            />
+          </div>
+          <div
+            class="flex flex-row justify-evenly items-center right-nav w-3/12 h-full"
+          >
+            <a class="nav-items" href="/users/register">Sign Up</a>
+            <a class="nav-items" href="/users/login">Log In</a>
+          </div>
+        </nav>
+      </header>
+      <main class="flex justify-center bg-black h-full w-full">
+        <section id="main-section" class="w-9/12 h-full">{{{body}}}</section>
+      </main>
+      <footer class="w-9/12 h-16"></footer>
+    </div>
+
+
+        {{!-- TODO: Add function to show search bar when icon is clicked  --}}
+
+    <script>
+      const search = document.getElementById("search-icon");
+      search.addEventListener('click', (){
+          
+      })
+    </script>
+  </body>
 </html>

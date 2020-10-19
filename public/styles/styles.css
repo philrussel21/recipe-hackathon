@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form-card {
+  @apply flex flex-col p-4 h-auto w-64 border-2 m-4;
+}
+.form-input {
+  @apply text-gray-100 mb-4;
+}
+.form-label {
+  @apply text-gray-100;
+}
+.nav-items {
+  @apply text-2xl;
+}
