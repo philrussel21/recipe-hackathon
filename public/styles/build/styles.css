@@ -21638,6 +21638,33 @@ video {
           animation: bounce 1s infinite;
 }
 
+.form-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  height: auto;
+  width: 16rem;
+  border-width: 2px;
+  margin: 1rem;
+}
+
+.form-input {
+  --text-opacity: 1;
+  color: #f7fafc;
+  color: rgba(247, 250, 252, var(--text-opacity));
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  --text-opacity: 1;
+  color: #f7fafc;
+  color: rgba(247, 250, 252, var(--text-opacity));
+}
+
+.nav-items {
+  font-size: 1.5rem;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
