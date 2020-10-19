@@ -1,8 +1,4 @@
-const { mongo } = require("mongoose");
-
 const mongoose = require('mongoose');
-const { type } = require("os");
-const { model } = require("./user");
 const Schema = mongoose.Schema
 
 const Recipe = new Schema({
@@ -44,11 +40,14 @@ const Recipe = new Schema({
     type: [String],
     required: true
   },
-  // Reference using id to link recipe
-  // user: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Users'
-  // }
+  // Reference using user id to link recipe
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users'
+  }
 })
 Recipe.index({ title: 1 })
+Recipe.index({ city: 1 })
+Recipe.index({ country: 1 })
+Recipe.index({ tags: 1 })
 module.exports = mongoose.model('Recipe', Recipe)

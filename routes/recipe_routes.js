@@ -3,7 +3,7 @@ const router = express.Router()
 const {
   getAllRecipes,
   getRecipe,
-  addRecipe,
+  newRecipe,
   createRecipe,
   removeRecipe,
   changeRecipe
@@ -16,10 +16,11 @@ router.get('/', getAllRecipes);
 router.get('/:id', getRecipe);
 
 // Creates a new recipe
-router.get('/add', addRecipe)
+router.get('/add', newRecipe)
 router.post('/add', createRecipe);
 
 // Updates a recipe with given id
+// EDIT ROUTE TO MAKE CHANGES
 router.put('/:id', changeRecipe);
 
 // Deletes a recipe with given id
