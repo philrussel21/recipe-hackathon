@@ -1,4 +1,50 @@
-<div class="border h-full w-full flex flex-column justify-center items-center">
-<h1 class="text-4xl font-bold text-gray-100">Hello {{#if user}}{{user.username}}! {{/if}}</h1>
+<div class="border h-full w-full flex flex-column justify-center items-center p-4">
+{{!-- <h1 class="text-4xl font-bold text-gray-100">Hello {{#if user}}{{user.username}}! {{/if}}</h1> --}}
+
+    <div id="map" class="hidden h-full w-7/12 rounded-full border-4"></div>
+    {{recipes}}
+    <div>
+    {{#each recipes}}
+        <h1 class="city-name">{{this.city}}</h1>
+        <h1 class="country-name"> {{this.country}}</h1>
+    {{/each}}
+    </div>
+    <script>
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoicmRya24iLCJhIjoiY2tnOWIxaXIyMGl5czJzcGNxdnNkZmxjZCJ9.6Scz8GZQu3i86D3AND8SJg";
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/rdrkn/ckg9bhayn0w0h19mxot0fphd9",
+        zoom: 1,
+        maxZoom: 4,
+        minZoom: 1,
+      });
+
+      var marker = new mapboxgl.Marker()
+        .setLngLat([-33.8688197, 151.2092955])
+        .addTo(map);
+
+    const recipeCity = document.querySelectorAll('.city-name')
+    const recipeCountry = document.querySelectorAll('.country-name')
+
+    recipeCity.forEach((node, index) =>{
+    let city = node.textContent
+    let country = recipeCountry[index].textContent
+    console.log('marker should be made')
+    addMarker(city, country)
+    })
+
+    async function addMarker(city, country){
+        
+        const {data} = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}+${country}&key=AIzaSyCgqJcHOB-YQyrsN2T4fpGbAy29DJZY3Gc`)
+        const {lat, lng} = data.results[0].geometry.location
+        let location = [lng, lat]
+
+        const marker = new mapboxgl.Marker()
+        .setLngLat(location)
+        .addTo(map);
+    }
+    
+    </script>
 
 </div>

@@ -9,8 +9,8 @@ const {
 async function getAllRecipes(req, res) {
   try {
     const recipes = await allRecipes();
-    console.log(recipes);
-    res.render("recipes/index", { recipes });
+    const user = req.user || null
+    res.render("recipes/index", { recipes, user });
   } catch (error) {
     res.status(500).send({
       message: "Something went wrong with the server",

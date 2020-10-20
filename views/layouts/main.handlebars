@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/build/styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
     <title>Hackathon</title>
   </head>
 
@@ -32,8 +37,12 @@
           <div
             class="flex flex-row justify-evenly items-center right-nav w-3/12 h-full"
           >
-            <a class="nav-items" href="/users/register">Sign Up</a>
-            <a class="nav-items" href="/users/login">Log In</a>
+            {{#if user}}
+                <a class="nav-items" href="/recipes/">{{user.username}}</a>
+            {{else}}
+                <a class="nav-items" href="/users/register">Sign Up</a>
+                <a class="nav-items" href="/users/login">Log In</a>
+            {{/if}}
           </div>
         </nav>
       </header>
