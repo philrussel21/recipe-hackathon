@@ -28,18 +28,18 @@ const Recipe = new Schema({
     type: String,
     required: true
   },
-  tags: {
-    type: [String],
+  tags: [{
+    type: String,
     required: true,
-  },
-  steps: {
-    type: [String],
+  }],
+  steps: [{
+    type: String,
     required: true
-  },
-  ingredients: {
-    type: [String],
+  }],
+  ingredients: [{
+    type: String,
     required: true
-  },
+  }],
   // Reference using user id to link recipe
   user: {
     type: Schema.Types.ObjectId,

@@ -1,0 +1,152 @@
+{{#with recipe}}
+<form
+    class="flex flex-col h-auto border-2 w-full"
+    action="#"
+    id="recipe-form"
+  >
+   
+    <div class="recipe-form-panel">
+      <label for="title" class="form-label">Title </label>
+      <input type="text" name="title" class="form-input mb-12" value="{{title}}"/>
+      <button id="next-button" class="w-32 h-10 bg-blue-100">Next Item!</button>
+    </div>
+
+    <div class="recipe-form-panel">
+      <label for="intro" class="form-label">Introduction</label>
+      <textarea type="text" name="intro" class="form-input" >{{intro}}</textarea>
+    </div>
+
+    <div class="recipe-form-panel">
+      <label for="country" class="form-label">Country </label>
+      <input type="text" name="country" class="form-input" value="{{country}}"/>
+    </div>
+
+    <div class="recipe-form-panel">
+      <label for="city" class="form-label">City</label>
+      <input type="text" name="city" class="form-input" value="{{city}}"/>
+    </div>
+
+
+    <div class="recipe-form-panel">
+      <label for="cook_minutes" class="form-label inline">Cooking Time</label>
+      <input type="number" name="cook_minutes" class="form-input w-3/12 inline" value="{{cook_minutes}}"/>
+    </div>
+
+    <div class="recipe-form-panel">
+      <label for="img" class="form-label w-5/12">Image</label>
+      <input type="text" name="img" class="form-input" value="{{img}}"/>
+    </div>
+    
+        <div class="recipe-form-panel">
+      <label for="ingredients" class="form-label">Ingredients</label>
+      {{#each ingredients}}
+      <input
+        type="text"
+        name="ingredients"
+        class="form-input ingredients"
+        {{!-- id="ingredient-field" --}}
+        value="{{this}}"
+      />
+      {{!-- <button id="add-ingredient" class="bg-blue-100">Add Ingredient</button> --}}
+      {{/each}}
+    </div>
+    
+    <div class="recipe-form-panel">
+      <label for="steps" class="form-label">Steps</label>
+      {{#each steps}}
+      <input type="text" name="steps" class="form-input steps"
+       value="{{this}}"
+       {{!-- id="step-field" --}}
+       />
+       {{/each}}
+    {{!-- <button id="add-step" class="bg-blue-100">Add Step</button> --}}
+
+    </div>
+
+
+
+    <div class="recipe-form-panel">
+      <label for="tags" class="form-label">Tags</label>
+      {{#each tags}}
+      <input type="text" name="tags" class="form-input tags" 
+      value="{{this}}"
+       {{!-- id="tag-field"  --}}
+       />
+      {{/each}}
+    {{!-- <button id="add-tag" class="bg-blue-100">Add Tag</button> --}}
+
+    </div>
+
+    <div class="recipe-form-panel">
+      <input type="submit" id="submit-button" value="Update Recipe" />
+    </div>
+
+  </form>
+
+  {{/with}}
+
+  <script>
+     // create scrolling form
+  const nextButton = document.getElementById('next-button')
+
+  const panels = document.querySelectorAll('.recipe-form-panel')
+  const inputs = document.querySelectorAll('.form-input')
+  
+  let counter = 1
+  let inputCounter = 0
+
+  nextButton.addEventListener('click', (event)=>{
+    event.preventDefault()
+    panel = panels[counter]
+    input = inputs[inputCounter]
+    panel.scrollIntoView({behavior: "smooth", block: "end"})
+    counter + 1 !== panels.length && panel.appendChild(nextButton)
+    
+    counter++
+    inputCounter++
+  })
+  // Submitting
+  const form = document.querySelector('form')
+  const ings = document.querySelectorAll('.ingredients')
+  const steps = document.querySelectorAll('.steps')
+  const tags = document.querySelectorAll('.tags')
+  const submitBtn = document.querySelector('#submit-button')
+  
+
+  submitBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    const formData = {
+    ingredients: [],
+    tags: [],
+    steps: []
+  }
+
+  for (let field of form) {
+    if(field.className.includes('ingredients')) {
+      formData.ingredients.push(field.value)
+      continue
+    }
+    if(field.className.includes('steps')) {
+      formData.steps.push(field.value)
+      continue
+    }
+    if(field.className.includes('tags')) {
+      formData.tags.push(field.value)
+      continue
+    }
+    if(field.className.includes('form-input')) {
+      formData[field.name] = field.value
+    }
+  }
+  
+    axios.put('/recipes/{{recipe.id}}', formData)
+    .then(res => {
+      console.log(res)
+      window.location = res.data.redirectUrl
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  })
+
+  </script>

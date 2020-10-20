@@ -42,7 +42,6 @@ function newRecipe(req, res) {
 }
 
 async function createRecipe(req, res) {
-  console.log(req.body);
   try {
     // creates a new document in the recipe db
     const newRecipe = await addRecipe(req).save()
@@ -50,7 +49,7 @@ async function createRecipe(req, res) {
 
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
-    res.send({ error })
+    res.send({ error: "Not saving" })
   }
 }
 async function removeRecipe(req, res) {
@@ -86,11 +85,11 @@ async function editRecipe(req, res) {
 async function changeRecipe(req, res) {
   try {
     const updatedRecipe = await updateRecipe(req);
-    // FLASH UPDATED MESSAGE
-    return res.redirect(`/recipes/${updatedRecipe.id}`)
+    // // FLASH UPDATED MESSAGE
+    res.send({ redirectUrl: `/recipes/${updatedRecipe.id}` })
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
-    res.send(error);
+    res.status(500).send(error);
   }
 }
 
