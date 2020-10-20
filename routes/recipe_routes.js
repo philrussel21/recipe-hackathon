@@ -9,22 +9,24 @@ const {
   editRecipe,
   changeRecipe
 } = require('../controllers/recipes_controller');
+const { checkAuthenticated } = require('../middlewares/auth');
+
 
 // Returns all recipes
 router.get('/', getAllRecipes);
 
 // Creates a new recipe
-router.get('/new', newRecipe)
-router.post('/', createRecipe);
+router.get('/new', checkAuthenticated, newRecipe)
+router.post('/', checkAuthenticated, createRecipe);
 
 // Returns one recipe with given id
 router.get('/:id', getRecipe);
 
 // Updates a recipe with given id
-router.get('/:id/edit', editRecipe)
-router.put('/:id', changeRecipe);
+router.get('/:id/edit', checkAuthenticated, editRecipe)
+router.put('/:id', checkAuthenticated, changeRecipe);
 
 // Deletes a recipe with given id
-router.delete("/:id", removeRecipe);
+router.delete("/:id", checkAuthenticated, removeRecipe);
 
 module.exports = router;

@@ -26,7 +26,7 @@
   <p class="text-gray-100">Steps: {{ this.steps }}</p>
   <p class="text-gray-100">Ingredients: {{ this.ingredients }}</p>
   {{#unless isOwner}}
-  <button name="{{this.id}}" class="text-gray-100 delete">X</button>
+  <button name="{{this.id}}" class="bg-transparent hover:bg-red-500 text-white font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded delete">X</button>
   {{/unless}}
   </div>
   {{/each}}

@@ -38,7 +38,8 @@ async function getRecipe(req, res) {
 }
 
 function newRecipe(req, res) {
-  return res.render("recipes/add");
+  const user = req.user
+  return res.render("recipes/add", { user });
 }
 
 async function createRecipe(req, res) {
@@ -57,7 +58,7 @@ async function removeRecipe(req, res) {
     await destroyRecipe(req)
     res.send({
       // redirects to homepage after deletion
-      redirectUrl: "/",
+      redirectUrl: "/recipes",
     });
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
@@ -72,7 +73,8 @@ async function editRecipe(req, res) {
       req.flash('error', "Recipe not found")
       res.status(404).render('404', { error: req.flash('error') })
     } else {
-      return res.render('recipes/edit', { recipe })
+      const user = req.user
+      return res.render('recipes/edit', { recipe, user })
     }
   } catch (error) {
     res.status(500).send(error)

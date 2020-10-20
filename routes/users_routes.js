@@ -25,7 +25,7 @@ router.get('/logout', checkAuthenticated, (req, res) => {
 
 router.get('/:email', getUserProfile)
 
-router.get('/:email/edit', editProfile)
-router.patch('/:email', updateProfile)
+router.get('/:email/edit', checkAuthenticated, editProfile)
+router.patch('/:email', checkAuthenticated, updateProfile)
 
 module.exports = router
