@@ -86,21 +86,15 @@
     {{/each}} --}}
   </div>
   <div></div>
-  <script>
+<script>
     const mapToggle = document.getElementById("map-toggle");
-    const listToggle = document.getElementById("list-toggle");
     const mapDiv = document.getElementById("map");
     const listDiv = document.getElementById("list");
 
     mapToggle.addEventListener("click", () => {
       listDiv.classList.toggle("hidden");
-        mapToggle.textContent === "MAP" ? mapToggle.textContent = "LIST" : mapToggle.textContent = "MAP"
+      mapToggle.textContent === "MAP" ? mapToggle.textContent = "LIST" : mapToggle.textContent = "MAP"
       mapDiv.classList.toggle("hidden");
-    });
-
-    listToggle.addEventListener("click", () => {
-      mapDiv.classList.toggle("hidden");
-      listDiv.classList.toggle("hidden");
     });
 
     //MAP STUFF
