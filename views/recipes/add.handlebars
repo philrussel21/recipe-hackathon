@@ -1,19 +1,16 @@
-<div class="border-2 flex flex-col h-full overflow-hidden w-full">
+<div class="flex h-full w-full">
+<div class="border-2 flex flex-col h-full overflow-hidden w-6/12">
   <form
-    class="flex flex-col h-auto border-2 w-6/12"
+    class="flex flex-col h-auto border-2 w-full"
     action="/recipes/"
     method="POST"
+    id="recipe-form"
   >
    
-    <div id = "first-recipe-panel"class="recipe-form-panel">
+    <div class="recipe-form-panel">
       <label for="title" class="form-label">Title </label>
       <input type="text" name="title" class="form-input mb-12" />
       <button id="next-button" class="w-32 h-10 bg-blue-100">Next Item!</button>
-    </div>
-
-    <div id="second-panel"  class="recipe-form-panel">
-      <label for="intro" class="form-label">Introduction</label>
-      <textarea type="text" name="intro" class="form-input"></textarea>
     </div>
 
     <div class="recipe-form-panel">
@@ -26,6 +23,10 @@
       <input type="text" name="city" class="form-input" />
     </div>
 
+    <div class="recipe-form-panel">
+      <label for="intro" class="form-label">Introduction</label>
+      <textarea type="text" name="intro" class="form-input"></textarea>
+    </div>
 
     <div class="recipe-form-panel">
       <label for="cook_minutes" class="form-label inline">Cooking Time</label>
@@ -37,17 +38,7 @@
       <input type="text" name="img" class="form-input" />
     </div>
     
-    <div class="recipe-form-panel">
-      <label for="tags" class="form-label">Tags</label>
-      <input type="text" name="tags" class="form-input" />
-    </div>
-    
-    <div class="recipe-form-panel">
-      <label for="steps" class="form-label">Steps</label>
-      <input type="text" name="steps" class="form-input" />
-    </div>
-
-    <div class="recipe-form-panel">
+        <div class="recipe-form-panel">
       <label for="ingredients" class="form-label">Ingredients</label>
       <input
         type="text"
@@ -57,51 +48,126 @@
       />
       <button id="add-ingredient" class="bg-blue-100">Add Ingredient</button>
     </div>
+    
+    <div class="recipe-form-panel">
+      <label for="steps" class="form-label">Steps</label>
+      <input type="text" name="steps" class="form-input" id="step-field"/>
+    <button id="add-step" class="bg-blue-100">Add Step</button>
+
+    </div>
+
+
 
     <div class="recipe-form-panel">
-      <input type="submit" value="Add Recipe" />
+      <label for="tags" class="form-label">Tags</label>
+      <input type="text" name="tags" class="form-input" id="tag-field" />
+    <button id="add-tag" class="bg-blue-100">Add Tag</button>
+
+    </div>
+
+    <div class="recipe-form-panel">
+      <input type="submit" id="submit-button" value="Add Recipe" />
     </div>
 
   </form>
-  <div id="container" class="w-64 bg-blue-300 border-2 h-64"></div>
-</div>
 
+</div>
+  <div class="w-6/12 bg-blue-300 border-2 h-full p-10">
+    <div class="w-full h-full border">
+      <div>
+        <div class="flex border inline-block hidden recipe-areas"><h3>Title:</h3></div>
+      </div>
+      <div class="flex justify-between">
+        <div class="recipe-areas flex border inline-block hidden"><h3>Country: </h3></div>
+        <div class="recipe-areas flex border inline-block hidden"><h3>City: </h3></div>
+      </div>
+        <div class="recipe-areas flex border inline-block hidden h-64"><h3>Introduction: </h3></div>
+        <div class="recipe-areas flex border inline-block hidden"><h3>Cooking Time: </h3></div>
+        <div class="recipe-areas flex border inline-block hidden"><h3>Image: </h3></div>
+        <div id="ingredients-container" class="recipe-areas flex border hidden"><h3>Ingredients: </h3></div>
+        <div id="steps-container" class="recipe-areas flex border hidden"><h3>Steps: </h3></div>
+        <div id="tags-container" class="recipe-areas flex border hidden"><h3>Tags: </h3></div>
+
+        <div ></div>
+    </div>
+  </div>
+</div>
 <script>
   // Function to add fields to recipe preview
 
-  const fieldContainer = document.getElementById("container");
+  const fieldContainer = document.querySelectorAll(".recipe-areas")
+  const ingredientsContainer = document.getElementById("ingredients-container")
   const addIngredient = document.getElementById("add-ingredient");
+  const addStep = document.getElementById("add-step");
+  const addTag = document.getElementById("add-tag");
+  
   const ingredientField = document.getElementById("ingredient-field");
+  const stepField = document.getElementById("step-field");
+  const tagField = document.getElementById("tag-field");
+
   let ingredients = [];
+  let steps = [];
+  let tags = [];
 
-  addIngredient.addEventListener("click", (event) => {
-    event.preventDefault();
-    ingredients.push(ingredientField.value);
-    fieldContainer.textContent = "";
 
-    ingredients.forEach((item) => {
-      let ingredient = document.createElement("p");
-      ingredient.textContent = `${item}`;
-      ingredient.classList.add("ingredient-items");
-      fieldContainer.appendChild(ingredient);
-    });
+  function setupArray(node, input, array, name){
+    node.addEventListener("click", (event)=>{
+      event.preventDefault();
+      array.push(input.value)
+        
+    let element = document.createElement('p')
+    element.textContent = `${input.value}`
 
-    ingredientField.value = "";
-  });
+    let container = document.getElementById(`${name}-container`)
+    container.appendChild(element)
+
+    input.value = ''
+    })
+  }
+  
+  setupArray(addIngredient, ingredientField, ingredients, "ingredients")
+  setupArray(addStep, stepField, steps, "steps")
+  setupArray(addTag, tagField, tags, "tags")
+
+
+
+  const submitButton = document.getElementById('submit-button')
+  const recipeForm = document.getElementById('recipe-form')
+
+  submitButton.addEventListener("click", (event)=>{
+    event.preventDefault()
+    ingredientField.value = ingredients
+    stepField.value = steps
+    tagField.value = tags
+    recipeForm.submit()
+  })
 
 
   // create scrolling form
   const nextButton = document.getElementById('next-button')
 
   const panels = document.querySelectorAll('.recipe-form-panel')
+  const inputs = document.querySelectorAll('.form-input')
+  
   let counter = 1
+  let inputCounter = 0
 
   nextButton.addEventListener('click', (event)=>{
     event.preventDefault()
     panel = panels[counter]
+    input = inputs[inputCounter]
+
+    let p = document.createElement("p");
+    p.textContent = `${input.value}`;
+    p.classList.add('inline-block')
+    fieldContainer[inputCounter].appendChild(p);
+    fieldContainer[inputCounter].classList.remove('hidden')
+
     panel.scrollIntoView({behavior: "smooth", block: "end"})
     counter + 1 !== panels.length && panel.appendChild(nextButton)
+
     counter++
+    inputCounter++
   })
 
 </script>
