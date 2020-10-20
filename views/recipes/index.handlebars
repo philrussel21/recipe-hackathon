@@ -1,3 +1,71 @@
-{{#each recipes }}
-    {{title}}
-{{/each}}
+<div class="border h-full w-full flex flex-column justify-center items-center p-4 relative">
+{{!-- <h1 class="text-4xl font-bold text-gray-100">Hello {{#if user}}{{user.username}}! {{/if}}</h1> --}}
+    <div class="w-24 h-24 absolute left-0 top-0 flex flex-col items-center pt-2">
+        <button id="map-toggle" class=" text-2xl text-gray-800 cursor-pointer">MAP</button><span class="text-gray-100 transform rotate-90 text-4xl leading-none">|</span>
+        <button id="list-toggle" class=" text-2xl text-gray-800 cursor-pointer">LIST</button>
+    </div>
+    <div id="map" class="h-full w-7/12 rounded-full border-4"></div>
+    <div id="list" class="hidden border-2 w-10/12 h-full">{{#each recipes}}
+        <h1 class="city-name">{{this.city}}</h1>
+        <h1 class="country-name"> {{this.country}}</h1>
+    {{/each}}</div>
+    <div>
+    
+    </div>
+    <script>
+    
+    const mapToggle = document.getElementById('map-toggle')
+    const listToggle = document.getElementById('list-toggle')
+    const mapDiv = document.getElementById('map')
+    const listDiv = document.getElementById('list')
+
+    mapToggle.addEventListener("click",()=>{
+        listDiv.classList.toggle('hidden')
+        mapDiv.classList.toggle('hidden')
+    })
+
+    listToggle.addEventListener("click",()=>{
+        mapDiv.classList.toggle('hidden')
+        listDiv.classList.toggle('hidden')
+
+    })
+    
+
+    //MAP STUFF
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoicmRya24iLCJhIjoiY2tnOWIxaXIyMGl5czJzcGNxdnNkZmxjZCJ9.6Scz8GZQu3i86D3AND8SJg";
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/rdrkn/ckg9bhayn0w0h19mxot0fphd9",
+        zoom: 1,
+        maxZoom: 4,
+        minZoom: 1,
+      });
+
+      var marker = new mapboxgl.Marker()
+        .setLngLat([-80.60, 28.08])
+        .addTo(map);
+
+    const recipeCity = document.querySelectorAll('.city-name')
+    const recipeCountry = document.querySelectorAll('.country-name')
+
+    recipeCity.forEach((node, index) =>{
+    let city = node.textContent
+    let country = recipeCountry[index].textContent
+    addMarker(city, country)
+    })
+
+    async function addMarker(city, country){
+        
+        const {data} = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}+${country}&key=AIzaSyCgqJcHOB-YQyrsN2T4fpGbAy29DJZY3Gc`)
+        const {lat, lng} = data.results[0].geometry.location
+        let location = [lng, lat]
+
+        const marker = new mapboxgl.Marker()
+        .setLngLat(location)
+        .addTo(map);
+    }
+    
+    </script>
+
+</div>
