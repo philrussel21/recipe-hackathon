@@ -1,3 +1,4 @@
+{{!--
 <p class="text-gray-100">Title: {{ recipe.title }}</p>
 <p class="text-gray-100">Introduction: {{ recipe.intro }}</p>
 <p class="text-gray-100">Cooking Time: {{ recipe.cook_minutes }}</p>
@@ -8,20 +9,70 @@
 <p class="text-gray-100">Steps: {{ recipe.steps }}</p>
 <p class="text-gray-100">Ingredients: {{ recipe.ingredients }}</p>
 <p class="text-gray-100">Posted By:{{ user.username }}</p>
-<button id="delete" name="{{recipe.id}}" class="text-gray-100">X</button>
+--}}
+<div id="list" class="border-2 w-10/12 h-full overflow-y-auto">
+  <div class="border-2 w-full h-full bg-gray-700 p-4">
+    <div class="pl-8 w-full">
+      <h1 class="text-3xl text-gray-100 w-full flex items-center">
+        {{ recipe.title }}
+      </h1>
+    </div>
+    <div class="w-full h-16 px-8 flex items-center justify-between">
+      <div>
+        <p class="text-gray-100 text-xl city-name inline">{{ recipe.city }},</p>
+        <p class="inline text-xl text-gray-100 country-name">
+          {{ recipe.country }}
+        </p>
+      </div>
+      <h1 class="text-gray-100">Cooking Time: {{ recipe.cook_minutes }} min</h1>
+    </div>
+    <p class="text-gray-100">
+      {{ recipe.intro }} Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+      Voluptas quae ullam dolor animi! Quis iusto consequatur molestias
+      voluptatibus officiis veniam quia. Sint accusamus magni illo. Amet autem
+      laudantium veritatis minima?
+    </p>
+    <div class="flex flex-col items-apart">
+      <div class="w-full flex">
+        <div class="w-6/12 p-4">
+          <h3 class="text-2xl pl-8">Ingredients:</h3>
+          {{#each recipe.ingredients}}
+          <li class="list-none">{{ this }}</li>
+          {{/each}}
+        </div>
+        <div class="w-6/12 p-4">
+          <h3 class="text-2xl pl-8">Method:</h3>
+          <ol>
+            {{#each recipe.steps}}
+            <li>{{ this }}</li>
+            {{/each}}
+          </ol>
+        </div>
+      </div>
+      <div class="border-2 h-8 w-full flex justify-end">
+        {{#each recipe.tags}}
+        <h3 class="pr-4">#{{ this }}</h3>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="delete" name="{{ recipe.id }}" class="text-gray-100">X</button>
 
 <script>
-const deleteBtn = document.querySelector('#delete')
-deleteBtn.addEventListener('click', (e) => {
-  const recipeId = e.target.name
-  axios.delete(`/recipes/${recipeId}`)
-    .then(res => {
-      console.log(res)
-      // redirects user after deletion
-      window.location = res.data.redirectUrl
-    })
-    .catch(err => {
-      console.log(err)
-    })
-})
+  const deleteBtn = document.querySelector("#delete");
+  deleteBtn.addEventListener("click", (e) => {
+    const recipeId = e.target.name;
+    axios
+      .delete(`/recipes/${recipeId}`)
+      .then((res) => {
+        console.log(res);
+        // redirects user after deletion
+        window.location = res.data.redirectUrl;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 </script>

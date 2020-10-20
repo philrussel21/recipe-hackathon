@@ -1,33 +1,33 @@
-const Recipe = require('../models/recipe');
-const User = require('../models/user');
+const Recipe = require("../models/recipe");
+const User = require("../models/user");
 
 function allRecipes(req) {
-  return Recipe.find()
+  return Recipe.find().populate("user", "username email");
 }
 
 function getRecipeById(req) {
-  const recipeId = req.params.id
-  return Recipe.findById(recipeId)
+  const recipeId = req.params.id;
+  return Recipe.findById(recipeId);
 }
 
 function addRecipe(req) {
-  req.body.user = req.user.id
-  req.body.ingredients = req.body.ingredients.split(',')
-  req.body.steps = req.body.steps.split(',')
-  req.body.tags = req.body.tags.split(',')
-  req.body.cook_minutes = parseInt(req.body.cook_minutes)
-  return new Recipe(req.body)
+  req.body.user = req.user.id;
+  req.body.ingredients = req.body.ingredients.split(",");
+  req.body.steps = req.body.steps.split(",");
+  req.body.tags = req.body.tags.split(",");
+  req.body.cook_minutes = parseInt(req.body.cook_minutes);
+  return new Recipe(req.body);
 }
 
 function updateRecipe(req) {
-  const recipeId = req.params.id
-  req.body.user = req.user.id
-  return Recipe.findByIdAndUpdate(recipeId, req.body, { new: true })
+  const recipeId = req.params.id;
+  req.body.user = req.user.id;
+  return Recipe.findByIdAndUpdate(recipeId, req.body, { new: true });
 }
 
 function destroyRecipe(req) {
-  const recipeId = req.params.id
-  return Recipe.findByIdAndDelete(recipeId)
+  const recipeId = req.params.id;
+  return Recipe.findByIdAndDelete(recipeId);
 }
 
 module.exports = {
@@ -35,5 +35,5 @@ module.exports = {
   getRecipeById,
   addRecipe,
   updateRecipe,
-  destroyRecipe
-}
+  destroyRecipe,
+};

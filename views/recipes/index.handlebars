@@ -1,71 +1,138 @@
-<div class="border h-full w-full flex flex-column justify-center items-center p-4 relative">
-{{!-- <h1 class="text-4xl font-bold text-gray-100">Hello {{#if user}}{{user.username}}! {{/if}}</h1> --}}
-    <div class="w-24 h-24 absolute left-0 top-0 flex flex-col items-center pt-2">
-        <button id="map-toggle" class=" text-2xl text-gray-800 cursor-pointer">MAP</button><span class="text-gray-100 transform rotate-90 text-4xl leading-none">|</span>
-        <button id="list-toggle" class=" text-2xl text-gray-800 cursor-pointer">LIST</button>
+<div
+  class="h-full w-full flex flex-column justify-center items-center p-4 relative"
+>
+  {{!--
+  <h1 class="text-4xl font-bold text-gray-100">
+    Hello {{#if user}}{{ user.username }}! {{/if}}
+  </h1>
+  --}}
+  <div class="w-24 h-24 absolute left-0 top-0 flex flex-col items-center pt-2">
+    <a id="map-toggle" class="text-3xl p-4 text-gray-800 cursor-pointer">
+      LIST</a
+    >
+  </div>
+  <div id="map" class="h-full w-7/12 rounded-full border-4"></div>
+  <div id="list" class="hidden w-10/12 h-full p-4 overflow-y-auto">
+    {{#each recipes}}
+    <div class="w-full h-32 border-1">
+      <a href="/recipes/{{this.id}}" class="text-3xl text-gray-100 w-full flex items-center"
+        >{{ this.title }}</a
+      >
+      <div class="border-2 w-full flex justify-between">
+        <div class="flex">
+          {{#each this.tags}}
+          <h3 class="text-gray-400 text-sm pr-4">#{{ this }}</h3>
+          {{/each}}
+        </div>
+        <div class="">
+          <p class="text-gray-100 text-xl city-name inline">{{ this.city }},</p>
+          <p class="inline text-xl text-gray-100 country-name">
+            {{ this.country }}
+          </p>
+        </div>
+      </div>
+        <span class="text-gray-600 inline">uploaded by </span><a href="/users/{{this.user.email}}" class="text-gray-100 inline"> {{ this.user.username }}</a>
+
     </div>
-    <div id="map" class="h-full w-7/12 rounded-full border-4"></div>
-    <div id="list" class="hidden border-2 w-10/12 h-full">{{#each recipes}}
-        <h1 class="city-name">{{this.city}}</h1>
-        <h1 class="country-name"> {{this.country}}</h1>
-    {{/each}}</div>
-    <div>
-    
+    {{/each}}
+  </div>
+  {{!-- {{#each recipes}}
+  <div>
+    <div class="border-2 w-full h-full bg-gray-700 p-4">
+      <div class="pl-8 w-full">
+        <h1 class="text-3xl text-gray-100 w-full flex items-center">
+          {{ this.title }}
+        </h1>
+      </div>
+      <div class="w-full h-16 px-8 flex items-center justify-between">
+        <div>
+          <p class="text-gray-100 text-xl city-name inline">{{ this.city }},</p>
+          <p class="inline text-xl text-gray-100 country-name">
+            {{ this.country }}
+          </p>
+        </div>
+        <h1 class="text-gray-100">Cooking Time: {{ this.cook_minutes }} min</h1>
+      </div>
+      <p class="text-gray-100">
+        {{ this.intro }} Lorem ipsum dolor sit amet consectetur, adipisicing
+        elit. Voluptas quae ullam dolor animi! Quis iusto consequatur molestias
+        voluptatibus officiis veniam quia. Sint accusamus magni illo. Amet autem
+        laudantium veritatis minima?
+      </p>
+      <div class="flex flex-col items-apart">
+        <div class="w-full flex">
+          <div class="w-6/12 p-4">
+            <h3 class="text-2xl pl-8">Ingredients:</h3>
+            {{#each this.ingredients}}
+            <li class="list-none">{{ this }}</li>
+            {{/each}}
+          </div>
+          <div class="w-6/12 p-4">
+            <h3 class="text-2xl pl-8">Method:</h3>
+            <ol>
+              {{#each this.steps}}
+              <li>{{ this }}</li>
+              {{/each}}
+            </ol>
+          </div>
+        </div>
+        <div class="border-2 h-8 w-full flex justify-end">
+          {{#each this.tags}}
+          <h3 class="pr-4">#{{ this }}</h3>
+          {{/each}}
+        </div>
+      </div>
     </div>
-    <script>
-    
-    const mapToggle = document.getElementById('map-toggle')
-    const listToggle = document.getElementById('list-toggle')
-    const mapDiv = document.getElementById('map')
-    const listDiv = document.getElementById('list')
+    {{/each}} --}}
+  </div>
+  <div></div>
+  <script>
+    const mapToggle = document.getElementById("map-toggle");
+    const listToggle = document.getElementById("list-toggle");
+    const mapDiv = document.getElementById("map");
+    const listDiv = document.getElementById("list");
 
-    mapToggle.addEventListener("click",()=>{
-        listDiv.classList.toggle('hidden')
-        mapDiv.classList.toggle('hidden')
-    })
+    mapToggle.addEventListener("click", () => {
+      listDiv.classList.toggle("hidden");
+        mapToggle.textContent === "MAP" ? mapToggle.textContent = "LIST" : mapToggle.textContent = "MAP"
+      mapDiv.classList.toggle("hidden");
+    });
 
-    listToggle.addEventListener("click",()=>{
-        mapDiv.classList.toggle('hidden')
-        listDiv.classList.toggle('hidden')
-
-    })
-    
+    listToggle.addEventListener("click", () => {
+      mapDiv.classList.toggle("hidden");
+      listDiv.classList.toggle("hidden");
+    });
 
     //MAP STUFF
-      mapboxgl.accessToken =
-        "pk.eyJ1IjoicmRya24iLCJhIjoiY2tnOWIxaXIyMGl5czJzcGNxdnNkZmxjZCJ9.6Scz8GZQu3i86D3AND8SJg";
-      var map = new mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/rdrkn/ckg9bhayn0w0h19mxot0fphd9",
-        zoom: 1,
-        maxZoom: 4,
-        minZoom: 1,
-      });
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoicmRya24iLCJhIjoiY2tnOWIxaXIyMGl5czJzcGNxdnNkZmxjZCJ9.6Scz8GZQu3i86D3AND8SJg";
+    var map = new mapboxgl.Map({
+      container: "map",
+      style: "mapbox://styles/rdrkn/ckg9bhayn0w0h19mxot0fphd9",
+      zoom: 1,
+      maxZoom: 4,
+      minZoom: 1,
+    });
 
-      var marker = new mapboxgl.Marker()
-        .setLngLat([-80.60, 28.08])
-        .addTo(map);
+    var marker = new mapboxgl.Marker().setLngLat([-80.6, 28.08]).addTo(map);
 
-    const recipeCity = document.querySelectorAll('.city-name')
-    const recipeCountry = document.querySelectorAll('.country-name')
+    const recipeCity = document.querySelectorAll(".city-name");
+    const recipeCountry = document.querySelectorAll(".country-name");
 
-    recipeCity.forEach((node, index) =>{
-    let city = node.textContent
-    let country = recipeCountry[index].textContent
-    addMarker(city, country)
-    })
+    recipeCity.forEach((node, index) => {
+      let city = node.textContent;
+      let country = recipeCountry[index].textContent;
+      addMarker(city, country);
+    });
 
-    async function addMarker(city, country){
-        
-        const {data} = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}+${country}&key=AIzaSyCgqJcHOB-YQyrsN2T4fpGbAy29DJZY3Gc`)
-        const {lat, lng} = data.results[0].geometry.location
-        let location = [lng, lat]
+    async function addMarker(city, country) {
+      const { data } = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${city}+${country}&key=AIzaSyCgqJcHOB-YQyrsN2T4fpGbAy29DJZY3Gc`
+      );
+      const { lat, lng } = data.results[0].geometry.location;
+      let location = [lng, lat];
 
-        const marker = new mapboxgl.Marker()
-        .setLngLat(location)
-        .addTo(map);
+      const marker = new mapboxgl.Marker().setLngLat(location).addTo(map);
     }
-    
-    </script>
-
+  </script>
 </div>
