@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Recipe = require('../models/recipe')
 
 
 function getUser(req, res) {
@@ -43,7 +44,9 @@ async function getUserProfile(req, res) {
       return res.status(404).render('404', { error: req.flash('error') })
     } else {
 
-      res.render('users/show', { user })
+      const recipes = await getUserRecipes(user.id)
+      const isOwner = req.user.id !== user.id
+      res.render('users/show', { user, recipes, isOwner })
     }
 
   } catch (error) {
@@ -59,8 +62,8 @@ async function editProfile(req, res) {
       req.flash('error', "User not found")
       return res.status(404).render('404', { error: req.flash('error') })
     } else {
-
-      return res.render('users/edit', { user })
+      const recipes = await getUserRecipes(user.id)
+      return res.render('users/edit', { user, recipes })
     }
   } catch (error) {
     res.status(500).send({ message: error })
@@ -71,12 +74,15 @@ async function updateProfile(req, res) {
   try {
     const userEmail = req.params.email
     const updatedUser = await User.findOneAndUpdate({ email: userEmail }, req.body, { new: true })
-    return res.redirect(`/users/${userEmail}`)
+    return res.send({ redirectUrl: `/users/${userEmail}` })
   } catch (error) {
     res.status(500).send({ message: error })
   }
 }
 
+function getUserRecipes(userId) {
+  return Recipe.find({ user: userId })
+}
 
 
 module.exports = { getUser, postUser, getRegister, addUser, getUserProfile, editProfile, updateProfile }

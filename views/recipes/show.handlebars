@@ -8,12 +8,13 @@
 <p class="text-gray-100">Steps: {{ recipe.steps }}</p>
 <p class="text-gray-100">Ingredients: {{ recipe.ingredients }}</p>
 <p class="text-gray-100">Posted By:{{ user.username }}</p>
-<button id="delete" class="text-gray-100">X</button>
+<button id="delete" name="{{recipe.id}}" class="text-gray-100">X</button>
 
 <script>
 const deleteBtn = document.querySelector('#delete')
 deleteBtn.addEventListener('click', (e) => {
-  axios.delete('/recipes/{{recipe.id}}')
+  const recipeId = e.target.name
+  axios.delete(`/recipes/${recipeId}`)
     .then(res => {
       console.log(res)
       // redirects user after deletion

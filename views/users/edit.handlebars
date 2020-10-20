@@ -1,0 +1,74 @@
+<form action="#">
+<label class="text-gray-100">Username:</label>
+<input id="username" type="text" name="username" value=" {{ user.username }}">
+<br>
+<label class="text-gray-100">Introduction:</label>
+<textarea id="intro" name="intro" cols="30" rows="2">{{user.intro}}</textarea>
+<br>
+<label class="text-gray-100">Email: {{ user.email }}</label>
+<button id="formBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
+</form>
+
+
+{{!-- <a href="/users/{{user.email}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Account</a> --}}
+
+<h1 class="text-gray-100">Recipes</h1>
+{{#if recipes}}
+  {{#each recipes}}
+  <div class="recipes">
+  <p class="text-gray-100">Title: {{ this.title }}</p>
+  <p class="text-gray-100">Introduction: {{ this.intro }}</p>
+  <p class="text-gray-100">Cooking Time: {{ this.cook_minutes }}</p>
+  <p class="text-gray-100">Country: {{ this.country }}</p>
+  <p class="text-gray-100">City: {{ this.city }}</p>
+  <p class="text-gray-100">Image: {{ this.img }}</p>
+  <p class="text-gray-100">Tags: {{ this.tags }}</p>
+  <p class="text-gray-100">Steps: {{ this.steps }}</p>
+  <p class="text-gray-100">Ingredients: {{ this.ingredients }}</p>
+  {{#unless isOwner}}
+  <button name="{{this.id}}" class="text-gray-100 delete">X</button>
+  {{/unless}}
+  </div>
+  {{/each}}
+{{/if}}
+
+<script>
+  // RECIPE Delete buttons
+const deleteBtns = document.querySelectorAll('.delete') || null
+if(deleteBtns) {
+  deleteBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+    const recipeId = e.target.name
+    axios.delete(`/recipes/${recipeId}`)
+      .then(res => {
+        console.log(res)
+        // redirects user after deletion
+        window.location = res.data.redirectUrl
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  })
+  })
+}
+ // PROFILE Update Button
+  const username = document.querySelector('#username')
+  const intro = document.querySelector('#intro')
+  const formBtn = document.querySelector('#formBtn')
+
+
+  formBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    const formData = {}
+    formData.intro = intro.value
+    formData.username = username.value
+    axios.patch('/users/{{user.email}}', formData)
+    .then(res => {
+      console.log(res)
+      window.location = res.data.redirectUrl
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  })
+</script>
