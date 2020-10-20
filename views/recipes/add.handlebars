@@ -1,15 +1,15 @@
 <div class="flex h-full w-full">
-<div class="border-2 flex flex-col h-full overflow-hidden w-6/12">
+<div class="flex flex-col h-full overflow-hidden w-6/12">
   <form
-    class="flex flex-col h-auto border-2 w-full"
+    class="flex flex-col h-auto w-full"
     action="/recipes/"
     method="POST"
     id="recipe-form"
   >
    
     <div class="recipe-form-panel">
-      <label for="title" class="form-label">Title </label>
-      <input type="text" name="title" class="form-input mb-12" />
+      <label for="title" class="form-label text-2xl mb-10">First add a title! </label>
+      <input type="text" name="title" class="form-input rounded-2xl p-auto" />
       <button id="next-button" class="w-32 h-10 bg-blue-100">Next Item!</button>
     </div>
 
@@ -38,7 +38,7 @@
       <input type="text" name="img" class="form-input" />
     </div>
     
-        <div class="recipe-form-panel">
+    <div class="recipe-form-panel">
       <label for="ingredients" class="form-label">Ingredients</label>
       <input
         type="text"
@@ -72,10 +72,10 @@
   </form>
 
 </div>
-  <div class="w-6/12 bg-blue-300 border-2 h-full p-10">
-    <div class="w-full h-full border">
+  <div class="w-6/12 h-full p-10">
+    <div class="w-full h-full">
       <div>
-        <div class="flex border inline-block hidden recipe-areas"><h3>Title:</h3></div>
+        <div class="flex inline-block hidden recipe-areas"><h3>Title:</h3></div>
       </div>
       <div class="flex justify-between">
         <div class="recipe-areas flex border inline-block hidden"><h3>Country: </h3></div>
