@@ -6,6 +6,7 @@
 	"scripts": {
 		"build": "npx tailwind build ./public/styles/styles.css -o ./public/styles/build/styles.css",
 		"test": "echo \"Error: no test specified\" && exit 1",
+		"seed": "node db/seeds.js",
 		"start": "nodemon"
 	},
 	"repository": {

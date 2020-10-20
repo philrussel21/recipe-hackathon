@@ -1,0 +1,68 @@
+[
+	{
+		"username": "JimDog",
+		"email": "Jim@dawgbusiness.com",
+		"intro": "My name is Jim and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "PamDog",
+		"email": "Pam@dawgbusiness.com",
+		"intro": "My name is Pam and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "DwightDog",
+		"email": "Dwight@dawgbusiness.com",
+		"intro": "My name is Dwight and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "MichaelDog",
+		"email": "Michael@dawgbusiness.com",
+		"intro": "My name is Michael and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "TobyDog",
+		"email": "Toby@dawgbusiness.com",
+		"intro": "My name is Toby and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "TedDog",
+		"email": "Ted@dawgbusiness.com",
+		"intro": "My name is Ted and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "BarneyDog",
+		"email": "Barney@dawgbusiness.com",
+		"intro": "My name is Barney and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "RobinDog",
+		"email": "Robin@dawgbusiness.com",
+		"intro": "My name is Robin and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "MarshalDog",
+		"email": "Marshal@dawgbusiness.com",
+		"intro": "My name is Marshal and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "LilyDog",
+		"email": "Lily@dawgbusiness.com",
+		"intro": "My name is Lily and I like dawgs.",
+		"password": "password"
+	},
+	{
+		"username": "SheldonDog",
+		"email": "Sheldon@dawgbusiness.com",
+		"intro": "My name is Sheldon and I like dawgs.",
+		"password": "password"
+	}
+]

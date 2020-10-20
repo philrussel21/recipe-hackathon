@@ -43,7 +43,7 @@ const Recipe = new Schema({
   // Reference using user id to link recipe
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'Users'
+    ref: 'User'
   }
 })
 Recipe.index({ title: 1 })
