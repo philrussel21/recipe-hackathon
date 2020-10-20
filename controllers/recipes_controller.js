@@ -56,15 +56,12 @@ async function removeRecipe(req, res) {
   try {
     await destroyRecipe(req)
     res.send({
-      // responds back to the FE with JSON obj that has the route
-      // where to redirect after deleting a comment.
-      // not sure if we can change to something or use a plain res.redirect?
-      redirect: "/recipes",
-      // window.location = res.redirect
+      // redirects to homepage after deletion
+      redirectUrl: "/",
     });
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
-    res.send(error);
+    res.status(500).send(error);
   }
 }
 
