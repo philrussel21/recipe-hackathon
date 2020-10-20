@@ -12,6 +12,10 @@ function getRecipeById(req) {
 
 function addRecipe(req) {
   req.body.user = req.user.id
+  req.body.ingredients = req.body.ingredients.split(',')
+  req.body.steps = req.body.steps.split(',')
+  req.body.tags = req.body.tags.split(',')
+  req.body.cook_minutes = parseInt(req.body.cook_minutes)
   return new Recipe(req.body)
 }
 
