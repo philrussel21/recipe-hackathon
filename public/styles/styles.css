@@ -2,21 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Trirong:wght@100&display=swap");
+
 .form-card {
-	@apply flex flex-col p-4 h-auto w-64 border-2 m-4;
+  @apply flex flex-col p-4 h-auto w-64 border-2 m-4;
 }
 .form-input {
-	@apply text-gray-800 mb-4;
+  @apply text-gray-800 mb-4 rounded-2xl w-64;
 }
 .form-label {
-	@apply text-gray-100;
+  @apply text-gray-100 text-xl mb-10;
 }
 .nav-items {
-	@apply text-xl;
+  @apply text-xl;
 }
 .ingredient-items {
-	@apply text-gray-100 m-1;
+  @apply text-gray-100 m-1;
 }
 .recipe-form-panel {
-	@apply h-screen flex flex-col items-center pt-32;
+  @apply h-screen flex flex-col items-center justify-center;
+}
+
+.recipe-card-headings {
+  @apply text-xl;
+}
+.button {
+  @apply px-4 py-2 rounded-xl;
 }

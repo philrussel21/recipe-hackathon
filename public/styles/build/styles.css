@@ -414,7 +414,7 @@ ul {
  */
 
 html {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
+  font-family: Hind, sans-serif; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
@@ -550,7 +550,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 /**
@@ -10302,15 +10302,11 @@ video {
 }
 
 .font-sans {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: Hind, sans-serif;
 }
 
 .font-serif {
-  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-}
-
-.font-mono {
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: Trirong, serif;
 }
 
 .font-hairline {
@@ -21642,6 +21638,10 @@ video {
           animation: bounce 1s infinite;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Trirong:wght@100&display=swap");
+
 .form-card {
   display: flex;
   flex-direction: column;
@@ -21657,12 +21657,16 @@ video {
   color: #2d3748;
   color: rgba(45, 55, 72, var(--text-opacity));
   margin-bottom: 1rem;
+  border-radius: 1rem;
+  width: 16rem;
 }
 
 .form-label {
   --text-opacity: 1;
   color: #f7fafc;
   color: rgba(247, 250, 252, var(--text-opacity));
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
 }
 
 .nav-items {
@@ -21681,7 +21685,19 @@ video {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 8rem;
+  justify-content: center;
+}
+
+.recipe-card-headings {
+  font-size: 1.25rem;
+}
+
+.button {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.75rem;
 }
 
 @media (min-width: 640px) {
@@ -31401,15 +31417,11 @@ video {
   }
 
   .sm\:font-sans {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Hind, sans-serif;
   }
 
   .sm\:font-serif {
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  }
-
-  .sm\:font-mono {
-    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: Trirong, serif;
   }
 
   .sm\:font-hairline {
@@ -52393,15 +52405,11 @@ video {
   }
 
   .md\:font-sans {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Hind, sans-serif;
   }
 
   .md\:font-serif {
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  }
-
-  .md\:font-mono {
-    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: Trirong, serif;
   }
 
   .md\:font-hairline {
@@ -73385,15 +73393,11 @@ video {
   }
 
   .lg\:font-sans {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Hind, sans-serif;
   }
 
   .lg\:font-serif {
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  }
-
-  .lg\:font-mono {
-    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: Trirong, serif;
   }
 
   .lg\:font-hairline {
@@ -94377,15 +94381,11 @@ video {
   }
 
   .xl\:font-sans {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Hind, sans-serif;
   }
 
   .xl\:font-serif {
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  }
-
-  .xl\:font-mono {
-    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: Trirong, serif;
   }
 
   .xl\:font-hairline {
