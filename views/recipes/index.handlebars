@@ -22,11 +22,6 @@
 <div
   class="h-full w-full flex flex-column justify-center items-center p-4 relative"
 >
-  {{!--
-  <h1 class="text-4xl font-bold text-gray-100">
-    Hello {{#if user}}{{ user.username }}! {{/if}}
-  </h1>
-  --}}
   <div class="w-24 h-24 absolute left-0 top-0 flex flex-col items-center pt-2">
     <a id="map-toggle" class="text-3xl p-4 text-gray-800 cursor-pointer">
       LIST</a
@@ -82,18 +77,6 @@
       maxZoom: 4,
       minZoom: 1,
     });
-
-//    var popup = new mapboxgl.Popup({offset: 25})
-//    .setText('Construction on the Washington Monument began in 1848.');
-
-// .setPopup(popup)
-
-//    var marker = new mapboxgl.Marker().setLngLat([-80.6, 28.08]).addTo(map);
-
-
- //   marker.addEventListener('click',()=>{
- //       marker.classList.add('hidden')
- //   })
 
     const recipeObject = document.querySelectorAll('.recipe-object')
     const recipeCity = document.querySelectorAll(".city-name");
