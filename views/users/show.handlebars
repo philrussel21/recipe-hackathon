@@ -1,10 +1,10 @@
 {{!-- USER DEETS --}}
 <div class="bg-white w-full px-4 py-4 my-2 rounded">
-<p class="text-black text-5xl">{{ user.username }}</p>
-<p class="text-black text-xl">{{ user.intro }}</p>
-<p class="text-black">Email: {{ user.email }}</p>
+<p class="text-black text-5xl">{{ userProfile.username }}</p>
+<p class="text-black text-xl">{{ userProfile.intro }}</p>
+<p class="text-black">Email: {{ userProfile.email }}</p>
   {{#unless isOwner}}
-<a href="/users/{{user.email}}/edit" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-4 rounded">Edit Account</a>
+<a href="/users/{{userProfile.email}}/edit" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-4 rounded">Edit Account</a>
 
   {{/unless}}
 </div>
