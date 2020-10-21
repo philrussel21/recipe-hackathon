@@ -34,6 +34,7 @@ function addRecipe(req) {
 function updateRecipe(req) {
   const recipeId = req.params.id;
   req.body.user = req.user.id;
+  console.log(req.body)
   return Recipe.findByIdAndUpdate(recipeId, req.body, { new: true });
 }
 

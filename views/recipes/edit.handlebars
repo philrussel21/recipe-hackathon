@@ -106,7 +106,7 @@
     inputCounter++
   })
   // Submitting
-  const form = document.querySelector('form')
+  const form = document.querySelector('#recipe-form')
   const ings = document.querySelectorAll('.ingredients')
   const steps = document.querySelectorAll('.steps')
   const tags = document.querySelectorAll('.tags')
@@ -120,7 +120,6 @@
     tags: [],
     steps: []
   }
-
   for (let field of form) {
     if(field.className.includes('ingredients')) {
       formData.ingredients.push(field.value)
@@ -138,7 +137,7 @@
       formData[field.name] = field.value
     }
   }
-  
+  console.log(formData)
     axios.put('/recipes/{{recipe.id}}', formData)
     .then(res => {
       console.log(res)

@@ -57,6 +57,7 @@
   </div>
   {{#unless isOwner}}
   <button name="{{this.id}}" class="absolute top-0 right-0 bg-red-500 text-black font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded delete">X</button>
+  <a href="/recipes/{{this.id}}/edit" class="absolute top-0 left-0 bg-yellow-500 text-black font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">Edit Recipe</a>
   {{/unless}}
   </div>
   {{/each}}
