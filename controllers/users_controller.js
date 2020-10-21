@@ -22,7 +22,6 @@ async function addUser(req, res) {
       res.redirect("/users/register");
     } else {
       const newUser = await User.create(req.body);
-      console.log(newUser);
       req.flash("success", "Succesfully created an account. Please login");
       res.redirect("/users/login");
     }

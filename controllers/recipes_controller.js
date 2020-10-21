@@ -1,5 +1,6 @@
 const {
   allRecipes,
+  qRecipes,
   getRecipeById,
   addRecipe,
   updateRecipe,
@@ -8,7 +9,7 @@ const {
 
 async function getAllRecipes(req, res) {
   try {
-    const recipes = await allRecipes();
+    const recipes = await allRecipes(req);
     const user = req.user || null
     res.render("recipes/index", { recipes, user });
   } catch (error) {
@@ -16,6 +17,19 @@ async function getAllRecipes(req, res) {
       message: "Something went wrong with the server",
       error,
     });
+  }
+}
+
+async function searchForRecipes(req, res) {
+  try {
+    const recipes = await qRecipes(req)
+    if (!recipes.length) {
+      return res.redirect('/recipes')
+    }
+    const user = req.user || null
+    res.render('recipes/index', { recipes, user })
+  } catch (error) {
+    res.status(500).send({ message: error })
   }
 }
 
@@ -94,6 +108,7 @@ async function changeRecipe(req, res) {
 
 module.exports = {
   getAllRecipes,
+  searchForRecipes,
   getRecipe,
   newRecipe,
   createRecipe,

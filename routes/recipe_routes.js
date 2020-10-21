@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getAllRecipes,
+  searchForRecipes,
   getRecipe,
   newRecipe,
   createRecipe,
@@ -14,6 +15,9 @@ const { checkAuthenticated } = require('../middlewares/auth');
 
 // Returns all recipes
 router.get('/', getAllRecipes);
+
+// Query route
+router.post('/search', searchForRecipes)
 
 // Creates a new recipe
 router.get('/new', checkAuthenticated, newRecipe)
