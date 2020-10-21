@@ -5,7 +5,7 @@ function getUser(req, res) {
   // TODO adds error message (if any ) to flash
   res.render("users/login");
 }
-function postUser(req, res) {}
+function postUser(req, res) { }
 
 function getRegister(req, res) {
   // TODO: Add flash messages for taken emails
@@ -22,7 +22,6 @@ async function addUser(req, res) {
       res.redirect("/users/register");
     } else {
       const newUser = await User.create(req.body);
-      console.log(newUser);
       req.flash("success", "Succesfully created an account. Please login");
       res.redirect("/users/login");
     }

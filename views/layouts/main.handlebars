@@ -20,19 +20,48 @@
           <div
             class="left-nav flex flex-row justify-evenly items-center w-3/12 h-full"
           >
-            <a class="nav-items" href="/">Hackathon</a>
+
+          
+            <a class="nav-items" href="/">
+            <img src="/icons/logo.svg" alt="App logo" class="inline-block">
+            Orbis Foods</a>
+
           </div>
           <div
             class="mid-nav mb-auto w-6/12 h-full flex flex-row justify-end items-center pr-4"
           >
-            <a class="nav-items mr-4" href="/recipes/new">Add Recipe</a>
 
-            <img
-              id="search-icon"
+          {{!-- search query --}}
+          <form action="/recipes/search" method="POST" class="flex items-center border-b border-white py-1">
+                        <select name="category" id="category">
+              <option value="title">Title</option>
+              <option value="country">Country</option>
+              <option value="tags">Tags</option>
+            </select>
+    <input id="q" name="q" class="appearance-none bg-transparent border-none w-full text-black mr-3 py-1 px-2 leading-tight focus:outline-none" type="text">
+    <button id="search-icon" class="flex-shrink-0 bg-white hover:bg-white border-white hover:border-black text-sm border-2 text-white py-1 px-2 rounded">
+                 <img
+              
+
               class="cursor-pointer"
               src="/icons/search.svg"
               alt="Search Icon"
             />
+
+    </button>
+  </form>
+          {{!-- <div id="query">
+            <select name="category" id="category">
+              <option value="title">Title</option>
+              <option value="country">Country</option>
+              <option value="tags">Tags</option>
+            </select>
+            <input type="text" id="q" class="">
+            </div> --}}
+
+             <a class="nav-items mx-4 bg-teal-400 hover:bg-white text-black font-bold py-2 px-4 rounded-full" href="/recipes/new">
+             <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+             Add Recipe</a>
           </div>
           <div
             class="flex flex-row justify-evenly items-center right-nav w-3/12 h-full"
@@ -55,10 +84,14 @@
     {{!-- TODO: Add function to show search bar when icon is clicked  --}}
 
     <script>
+     /* const category = document.getElementById('category')
+      const input = document.getElementById('q')
         const search = document.getElementById("search-icon");
-        search.addEventListener('click', () => {
-
-      })
+        search.addEventListener('click', (e) => {
+          const cat = category.value
+          const q = input.value
+          axios.get(`/recipes/search/${cat}:${q}`)
+      })*/
     </script>
   </body>
 </html>

@@ -23,7 +23,7 @@ router.get('/logout', checkAuthenticated, (req, res) => {
   res.redirect('/')
 })
 
-router.get('/:email', getUserProfile)
+router.get('/:email', checkAuthenticated, getUserProfile)
 
 router.get('/:email/edit', checkAuthenticated, editProfile)
 router.patch('/:email', checkAuthenticated, updateProfile)
