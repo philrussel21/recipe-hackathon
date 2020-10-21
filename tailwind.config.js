@@ -5,8 +5,12 @@ module.exports = {
   },
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        76: "60vh",
+      },
+    },
   },
   variants: {},
   plugins: [],
-}
+};
