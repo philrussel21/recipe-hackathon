@@ -10493,6 +10493,10 @@ video {
   height: 16rem;
 }
 
+.h-76 {
+  height: 60vh;
+}
+
 .h-auto {
   height: auto;
 }
@@ -21662,7 +21666,7 @@ video {
 }
 
 .nav-items {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .ingredient-items {
@@ -31586,6 +31590,10 @@ video {
 
   .sm\:h-64 {
     height: 16rem;
+  }
+
+  .sm\:h-76 {
+    height: 60vh;
   }
 
   .sm\:h-auto {
@@ -52576,6 +52584,10 @@ video {
     height: 16rem;
   }
 
+  .md\:h-76 {
+    height: 60vh;
+  }
+
   .md\:h-auto {
     height: auto;
   }
@@ -73564,6 +73576,10 @@ video {
     height: 16rem;
   }
 
+  .lg\:h-76 {
+    height: 60vh;
+  }
+
   .lg\:h-auto {
     height: auto;
   }
@@ -94550,6 +94566,10 @@ video {
 
   .xl\:h-64 {
     height: 16rem;
+  }
+
+  .xl\:h-76 {
+    height: 60vh;
   }
 
   .xl\:h-auto {

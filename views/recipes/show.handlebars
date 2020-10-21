@@ -49,16 +49,19 @@
           </ol>
         </div>
       </div>
-      <div class="border-2 h-8 w-full flex justify-end">
+      <div class="border-2 h-8 w-full flex justify-between">
         {{#each recipe.tags}}
         <h3 class="pr-4">#{{ this }}</h3>
         {{/each}}
+<button id="delete" name="{{ recipe.id }}" class="text-gray-100 pr-1">    <img src="/icons/trash-2.svg" alt="Delete">
+</button>
+  </div>
       </div>
     </div>
-  </div>
+
+
 </div>
 
-<button id="delete" name="{{ recipe.id }}" class="text-gray-100">X</button>
 
 <script>
   const deleteBtn = document.querySelector("#delete");

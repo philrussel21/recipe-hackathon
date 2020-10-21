@@ -1,3 +1,24 @@
+<div id="recipe-modal" class="hidden bg-opacity-50 bg-gray-800 w-full h-full absolute left-0 z-10 flex justify-center items-center">
+    <div id="modal-card"class="p-2 z-20 w-6/12 h-76 bg-gray-800">
+    <img id="close-modal" src="/icons/x.svg" alt="Close" class="cursor-pointer">
+        <div class="w-full border-1">
+        <a href="/" id="modal-title" class="text-3xl text-gray-100 w-full flex items-center"></a>
+        <div class="border-2 w-full flex justify-between">
+            <div class="flex" >
+                <h3 class="text-gray-400 text-sm pr-4" id="modal-tags">tags</h3>
+            </div>
+            <div class="">
+            <p class="text-gray-100 text-xl inline" id="modal-city" name="blah">,</p>
+            <p class="inline text-xl text-gray-100" id="modal-country"></p>
+            </div>
+        </div>
+            <span class="text-gray-600 inline">uploaded by </span><a class="text-gray-100 inline hover:text-gray-200" id="modal-username"></a>
+
+    </div>
+
+    </div>
+</div>
+
 <div
   class="h-full w-full flex flex-column justify-center items-center p-4 relative"
 >
@@ -11,79 +32,34 @@
       LIST</a
     >
   </div>
-  <div id="map" class="h-full w-7/12 rounded-full border-4"></div>
+  <div id="map" class="z-0 h-full w-7/12 rounded-full"></div>
   <div id="list" class="hidden w-10/12 h-full p-4 overflow-y-auto">
     {{#each recipes}}
+    <div class="hidden recipe-object">{{this}}</div>
     <div class="w-full h-32 border-1">
-      <a href="/recipes/{{this.id}}" class="text-3xl text-gray-100 w-full flex items-center"
+      <a href="/recipes/{{this.id}}" class="recipe-titles text-3xl text-gray-100 w-full flex items-center"
         >{{ this.title }}</a
       >
+      <p class="hidden recipe-ids">{{this.id}}</p>
       <div class="border-2 w-full flex justify-between">
         <div class="flex">
           {{#each this.tags}}
-          <h3 class="text-gray-400 text-sm pr-4">#{{ this }}</h3>
+          <h3 class="text-gray-400 text-sm pr-4 recipe-tags">#{{ this }}</h3>
           {{/each}}
         </div>
         <div class="">
-          <p class="text-gray-100 text-xl city-name inline">{{ this.city }},</p>
+          <p class="text-gray-100 text-xl city-name inline" name="blah">{{ this.city }},</p>
           <p class="inline text-xl text-gray-100 country-name">
             {{ this.country }}
           </p>
         </div>
       </div>
-        <span class="text-gray-600 inline">uploaded by </span><a href="/users/{{this.user.email}}" class="text-gray-100 inline"> {{ this.user.username }}</a>
+        <p class="recipe-user-emails hidden">{{this.user.email}}</p>
+        <span class="text-gray-600 inline">uploaded by </span><a href="/users/{{this.user.email}}" class="text-gray-100 inline recipe-usernames"> {{ this.user.username }}</a>
 
     </div>
     {{/each}}
   </div>
-  {{!-- {{#each recipes}}
-  <div>
-    <div class="border-2 w-full h-full bg-gray-700 p-4">
-      <div class="pl-8 w-full">
-        <h1 class="text-3xl text-gray-100 w-full flex items-center">
-          {{ this.title }}
-        </h1>
-      </div>
-      <div class="w-full h-16 px-8 flex items-center justify-between">
-        <div>
-          <p class="text-gray-100 text-xl city-name inline">{{ this.city }},</p>
-          <p class="inline text-xl text-gray-100 country-name">
-            {{ this.country }}
-          </p>
-        </div>
-        <h1 class="text-gray-100">Cooking Time: {{ this.cook_minutes }} min</h1>
-      </div>
-      <p class="text-gray-100">
-        {{ this.intro }} Lorem ipsum dolor sit amet consectetur, adipisicing
-        elit. Voluptas quae ullam dolor animi! Quis iusto consequatur molestias
-        voluptatibus officiis veniam quia. Sint accusamus magni illo. Amet autem
-        laudantium veritatis minima?
-      </p>
-      <div class="flex flex-col items-apart">
-        <div class="w-full flex">
-          <div class="w-6/12 p-4">
-            <h3 class="text-2xl pl-8">Ingredients:</h3>
-            {{#each this.ingredients}}
-            <li class="list-none">{{ this }}</li>
-            {{/each}}
-          </div>
-          <div class="w-6/12 p-4">
-            <h3 class="text-2xl pl-8">Method:</h3>
-            <ol>
-              {{#each this.steps}}
-              <li>{{ this }}</li>
-              {{/each}}
-            </ol>
-          </div>
-        </div>
-        <div class="border-2 h-8 w-full flex justify-end">
-          {{#each this.tags}}
-          <h3 class="pr-4">#{{ this }}</h3>
-          {{/each}}
-        </div>
-      </div>
-    </div>
-    {{/each}} --}}
   </div>
   <div></div>
 <script>
@@ -108,18 +84,43 @@
       minZoom: 1,
     });
 
-    var marker = new mapboxgl.Marker().setLngLat([-80.6, 28.08]).addTo(map);
+//    var popup = new mapboxgl.Popup({offset: 25})
+//    .setText('Construction on the Washington Monument began in 1848.');
 
+// .setPopup(popup)
+
+//    var marker = new mapboxgl.Marker().setLngLat([-80.6, 28.08]).addTo(map);
+
+
+ //   marker.addEventListener('click',()=>{
+ //       marker.classList.add('hidden')
+ //   })
+
+    const recipeObject = document.querySelectorAll('.recipe-object')
     const recipeCity = document.querySelectorAll(".city-name");
     const recipeCountry = document.querySelectorAll(".country-name");
+    const recipeTitles = document.querySelectorAll(".recipe-titles")
+    const recipeIds = document.querySelectorAll(".recipe-ids")
+    const recipeTags = document.querySelectorAll('.recipe-tags')
+    const recipeUsernames = document.querySelectorAll(".recipe-usernames")
+    const recipeUserEmails = document.querySelectorAll(".recipe-user-emails")
+
+    const recipeModal = document.getElementById('recipe-modal')
+    const closeButton = document.getElementById('close-modal')
+    const modalTitle = document.getElementById('modal-title')
+    const modalTags = document.getElementById('modal-tags')
+    const modalCard = document.getElementById('modal-card')
+    const modalUsername = document.getElementById('modal-username')
+    const modalCity = document.getElementById('modal-city')
+    const modalCountry = document.getElementById('modal-country')
 
     recipeCity.forEach((node, index) => {
       let city = node.textContent;
       let country = recipeCountry[index].textContent;
-      addMarker(city, country);
+      addMarker(city, country, index);
     });
-
-    async function addMarker(city, country) {
+    async function addMarker(city, country, index) {
+      try {
       const { data } = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${city}+${country}&key=AIzaSyCgqJcHOB-YQyrsN2T4fpGbAy29DJZY3Gc`
       );
@@ -127,6 +128,33 @@
       let location = [lng, lat];
 
       const marker = new mapboxgl.Marker().setLngLat(location).addTo(map);
+
+      let markerElement = marker.getElement()
+
+        markerElement.addEventListener('mouseover', ()=> markerElement.style.cursor = "pointer")
+        recipeModal.addEventListener('click',       ()=> recipeModal.classList.add('hidden'))
+        closeButton.addEventListener('click',       ()=> recipeModal.classList.add('hidden'))
+
+        markerElement.addEventListener('click', ()=>{ 
+        recipeModal.classList.remove('hidden')
+        modalTitle.textContent = recipeTitles[index].textContent
+        modalTitle.href = "/recipes/"+recipeIds[index].textContent
+        modalTags.textContent = recipeTags[index].textContent
+        modalUsername.textContent = recipeUsernames[index].textContent
+        modalUsername.href = "/users/"+recipeUserEmails[index].textContent
+        modalCity.textContent = recipeCity[index].textContent
+        modalCountry.textContent = recipeCountry[index].textContent
+        })
+
+        
+    
+      }
+      catch(error) {
+        console.log(error)
+      }
     }
+
+
+
   </script>
 </div>
