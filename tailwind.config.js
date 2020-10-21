@@ -6,7 +6,8 @@ module.exports = {
   purge: [],
   theme: {
     fontFamily: {
-      'sans': ["Hind", "sans-serif"],
+      'sans': ['Hind', 'sans-serif'],
+      'serif': ['Trirong', 'serif']
     },
     extend: {
       height: {

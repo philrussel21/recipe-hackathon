@@ -8,13 +8,13 @@
   >
    
     <div class="recipe-form-panel">
-      <label for="title" class="form-label text-2xl mb-10">First add a title! </label>
-      <input type="text" name="title" class="form-input rounded-2xl p-auto" />
-      <button id="next-button" class="w-32 h-10 bg-blue-100">Next Item!</button>
+      <label for="title" class="form-label mt-20">First add a title!</label>
+      <input type="text" name="title" class="form-input" />
+      <button id="next-button" class="px-4 py-2 h-10 bg-blue-100 rounded-xl">Next Item!</button>
     </div>
 
     <div class="recipe-form-panel">
-      <label for="country" class="form-label">Country </label>
+      <label for="country" class="form-label mt-10">Country </label>
       <input type="text" name="country" class="form-input" />
     </div>
 
@@ -52,7 +52,7 @@
     <div class="recipe-form-panel">
       <label for="steps" class="form-label">Steps</label>
       <input type="text" name="steps" class="form-input" id="step-field"/>
-    <button id="add-step" class="bg-blue-100">Add Step</button>
+    <button id="add-step" class="bg-blue-100 button">Add Step</button>
 
     </div>
 
@@ -72,23 +72,23 @@
   </form>
 
 </div>
-  <div class="w-6/12 h-full p-10">
-    <div class="w-full h-full">
+  <div class="w-6/12 h-full p-10 text-black text-xl">
+    <div class="w-full h-full bg-gray-200 rounded-xl">
       <div>
-        <div class="flex inline-block hidden recipe-areas"><h3>Title:</h3></div>
+        <div class="flex inline-block hidden recipe-areas"><h3 class="recipe-card-headings">Title:</h3></div>
       </div>
 
       <div class="flex justify-between">
-        <div class="recipe-areas flex border inline-block hidden"><h3>Country: </h3></div>
-        <div class="recipe-areas flex border inline-block hidden"><h3>City: </h3></div>
+        <div class="recipe-areas flex  inline-block hidden"><h3 class="recipe-card-headings">Country: </h3></div>
+        <div class="recipe-areas flex  inline-block hidden"><h3 class="recipe-card-headings">City: </h3></div>
       </div>
 
-        <div class="recipe-areas flex border inline-block hidden h-64"><h3>Introduction: </h3></div>
-        <div class="recipe-areas flex border inline-block hidden"><h3>Cooking Time: </h3></div>
-        <div class="recipe-areas flex border inline-block hidden"><h3>Image: </h3></div>
-        <div id="ingredients-container" class="recipe-areas flex border hidden"><h3>Ingredients: </h3></div>
-        <div id="steps-container" class="recipe-areas flex border hidden"><h3>Steps: </h3></div>
-        <div id="tags-container" class="recipe-areas flex border hidden"><h3>Tags: </h3></div>
+        <div class="recipe-areas flex  inline-block hidden h-64"><h3 class="recipe-card-headings">Introduction: </h3></div>
+        <div class="recipe-areas flex  inline-block hidden"><h3 class="recipe-card-headings">Cooking Time: </h3></div>
+        <div class="recipe-areas flex  inline-block hidden"><h3 class="recipe-card-headings">Image: </h3></div>
+        <div id="ingredients-container" class="recipe-areas flex  hidden"><h3 class="recipe-card-headings">Ingredients: </h3></div>
+        <div id="steps-container" class="recipe-areas flex  hidden"><h3 class="recipe-card-headings">Steps: </h3></div>
+        <div id="tags-container" class="recipe-areas flex  hidden"><h3 class="recipe-card-headings">Tags: </h3></div>
     </div>
   </div>
 </div>

@@ -9,40 +9,30 @@
 <h1 class="text-gray-100">Recipes</h1>
 {{#if recipes}}
   {{#each recipes}}
-  <div class="recipes">
-  <p class="text-gray-100">Title: {{ this.title }}</p>
-  <p class="text-gray-100">Introduction: {{ this.intro }}</p>
-  <p class="text-gray-100">Cooking Time: {{ this.cook_minutes }}</p>
-  <p class="text-gray-100">Country: {{ this.country }}</p>
-  <p class="text-gray-100">City: {{ this.city }}</p>
-  <p class="text-gray-100">Image: {{ this.img }}</p>
-  <p class="text-gray-100">Tags: {{ this.tags }}</p>
-  <p class="text-gray-100">Steps: {{ this.steps }}</p>
-  <p class="text-gray-100">Ingredients: {{ this.ingredients }}</p>
-  {{!-- {{#unless isOwner}}
-  <button id="delete" name="{{this.id}}" class="text-gray-100">X</button>
-  {{/unless}} --}}
+  {{!-- CARD --}}
+  <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+  <img class="w-full" src="{{this.img}}" alt="{{this.title}}">
+  <div class="px-6 py-4">
+    <div class="font-bold text-xl mb-2">{{this.title}}</div>
+    <p class="text-gray-700 text-base">
+      {{this.intro}}
+    </p>
+  </div>
+  <div class="px-6 pt-4 pb-2 flex justify-center">
+
+    <a href="/recipes/{{this.id}}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+  See Full Recipe
+</a>
+</div>
+  <div class="px-6 pt-4 pb-2">
+    {{#each this.tags}}
+      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{this}}</span>
+    {{/each}}
+  </div>
+
+</div>
   </div>
   {{/each}}
 {{else}}
   <p class="text-gray-100"> No current Recipes</p>
 {{/if}}
-
-<script>
-/* const deleteBtn = document.querySelector('#delete') || null
-if(deleteBtn) {
-
-deleteBtn.addEventListener('click', (e) => {
-  const recipeId = e.target.name
-  axios.delete(`/recipes/${recipeId}`)
-    .then(res => {
-      console.log(res)
-      // redirects user after deletion
-      window.location = res.data.redirectUrl
-    })
-    .catch(err => {
-      console.log(err)
-    })
-})
-} */
-</script>
