@@ -13,7 +13,7 @@
     <title>Hackathon</title>
   </head>
 
-  <body class="h-screen overflow-hidden">
+  <body class="font-Hind h-screen overflow-hidden">
     <div class="flex flex-col h-screen justify-between bg-gray-600 items-center">
       <header class="flex justify-center h-16 w-full">
         <nav class="flex flex-row justify-between w-9/12">
@@ -33,7 +33,7 @@
 
           {{!-- search query --}}
           <form action="/recipes/search" method="POST" class="flex items-center border-b border-white py-1">
-                        <select name="category" id="category">
+                <select name="category" id="category">
               <option value="title">Title</option>
               <option value="country">Country</option>
               <option value="tags">Tags</option>
@@ -42,7 +42,7 @@
     <button id="search-icon" class="flex-shrink-0 bg-white hover:bg-white border-white hover:border-black text-sm border-2 text-white py-1 px-2 rounded">
                  <img
               
-
+                id="search"
               class="cursor-pointer"
               src="/icons/search.svg"
               alt="Search Icon"

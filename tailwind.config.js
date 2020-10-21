@@ -5,6 +5,9 @@ module.exports = {
   },
   purge: [],
   theme: {
+    fontFamily: {
+      'sans': ["Hind", "sans-serif"],
+    },
     extend: {
       height: {
         76: "60vh",
