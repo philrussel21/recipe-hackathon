@@ -5,6 +5,18 @@ function allRecipes(req) {
   return Recipe.find().populate("user", "username email");
 }
 
+function qRecipes(req) {
+  const category = req.body.category
+  const q = req.body.q
+  if (category === 'title') {
+    return Recipe.find({ title: `${q}` })
+  } else if (category === 'country') {
+    return Recipe.find({ country: `${q}` })
+  } else {
+    return Recipe.find({ tags: `${q}` })
+  }
+}
+
 function getRecipeById(req) {
   const recipeId = req.params.id;
   return Recipe.findById(recipeId);
@@ -32,6 +44,7 @@ function destroyRecipe(req) {
 
 module.exports = {
   allRecipes,
+  qRecipes,
   getRecipeById,
   addRecipe,
   updateRecipe,
