@@ -24,7 +24,7 @@ router.get('/new', checkAuthenticated, newRecipe)
 router.post('/', checkAuthenticated, createRecipe);
 
 // Returns one recipe with given id
-router.get('/:id', getRecipe);
+router.get('/:id', checkAuthenticated, getRecipe);
 
 // Updates a recipe with given id
 router.get('/:id/edit', checkAuthenticated, editRecipe)

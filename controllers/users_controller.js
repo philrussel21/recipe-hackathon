@@ -33,14 +33,15 @@ async function addUser(req, res) {
 async function getUserProfile(req, res) {
   const userEmail = req.params.email;
   try {
-    const user = await User.findOne({ email: userEmail });
-    if (!user) {
+    const userProfile = await User.findOne({ email: userEmail });
+    if (!userProfile) {
       req.flash("error", "User not found");
       return res.status(404).render("404", { error: req.flash("error") });
     } else {
-      const recipes = await getUserRecipes(user.id);
-      const isOwner = req.user.id !== user.id;
-      res.render("users/show", { user, recipes, isOwner });
+      const recipes = await getUserRecipes(userProfile.id);
+      const isOwner = req.user.id !== userProfile.id;
+      const user = req.user
+      res.render("users/show", { user, userProfile, recipes, isOwner });
     }
   } catch (error) {
     res.status(500).send({ message: error });

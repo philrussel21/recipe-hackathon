@@ -64,7 +64,7 @@ async function createRecipe(req, res) {
 
   } catch (error) {
     // TEST IF 404 or 500 type of error to show by passing invalid data
-    res.send({ error: "Not saving" })
+    res.redirect("/recipes/new")
   }
 }
 async function removeRecipe(req, res) {

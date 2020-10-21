@@ -1,12 +1,17 @@
-<p class="text-gray-100">Username: {{ user.username }}</p>
-<p class="text-gray-100">Introduction: {{ user.intro }}</p>
-<p class="text-gray-100">Email: {{ user.email }}</p>
+{{!-- USER DEETS --}}
+<div class="bg-white w-full px-4 py-4 my-2 rounded">
+<p class="text-black text-5xl">{{ userProfile.username }}</p>
+<p class="text-black text-xl">{{ userProfile.intro }}</p>
+<p class="text-black">Email: {{ userProfile.email }}</p>
   {{#unless isOwner}}
-<a href="/users/{{user.email}}/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Account</a>
+<a href="/users/{{userProfile.email}}/edit" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-4 rounded">Edit Account</a>
 
   {{/unless}}
+</div>
 
-<h1 class="text-gray-100">Recipes</h1>
+{{!-- RECIPES --}}
+<h1 class="text-gray-100 text-5xl">Recipes</h1>
+<div class="my-6">
 {{#if recipes}}
   {{#each recipes}}
   {{!-- CARD --}}
@@ -34,5 +39,6 @@
   </div>
   {{/each}}
 {{else}}
-  <p class="text-gray-100"> No current Recipes</p>
+  <p class="text-gray-100 text-4xl"> No current Recipes</p>
 {{/if}}
+</div>
