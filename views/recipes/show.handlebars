@@ -1,9 +1,12 @@
-<div id="list" class="border-2 w-10/12 h-full overflow-y-auto">
-  <div class="border-2 w-full h-full bg-gray-700 p-4">
+<div id="list" class="border-2 w-10/12 h-full bg-gray-700 overflow-y-auto">
+  <div class="w-full h-full p-4">
     <div class="pl-8 w-full">
       <h1 class="text-3xl text-gray-100 w-full flex items-center">
         {{ recipe.title }}
       </h1>
+                      <div class="max-w-sm rounded overflow-hidden shadow-lg">
+  <img class="w-full" src="{{recipe.img}}" alt="{{recipe.title}}">
+  </div>
     </div>
     <div class="w-full h-16 px-8 flex items-center justify-between">
       <div>
@@ -41,8 +44,8 @@
         {{#each recipe.tags}}
         <h3 class="pr-4">#{{ this }}</h3>
         {{/each}}
-<button id="delete" name="{{ recipe.id }}" class="text-gray-100 pr-1">    <img src="/icons/trash-2.svg" alt="Delete">
-</button>
+{{!-- <button id="delete" name="{{ recipe.id }}" class="text-gray-100 pr-1">    <img src="/icons/trash-2.svg" alt="Delete">
+</button> --}}
   </div>
       </div>
     </div>

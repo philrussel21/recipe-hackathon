@@ -12,7 +12,7 @@
 
 {{!-- <a href="/users/{{user.email}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Account</a> --}}
 
-<h1 class="text-gray-100">Recipes</h1>
+{{!-- <h1 class="text-gray-100">Recipes</h1>
 {{#if recipes}}
   {{#each recipes}}
   <div class="recipes">
@@ -29,7 +29,40 @@
   <button name="{{this.id}}" class="bg-transparent hover:bg-red-500 text-white font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded delete">X</button>
   {{/unless}}
   </div>
+  {{/each}} --}}
+  {{!-- RECIPES --}}
+<h1 class="text-gray-100 text-5xl">Recipes</h1>
+<div class="my-6">
+{{#if recipes}}
+  {{#each recipes}}
+  {{!-- CARD --}}
+  <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white relative">
+  <img class="w-full" src="{{this.img}}" alt="{{this.title}}">
+  <div class="px-6 py-4">
+    <div class="font-bold text-xl mb-2">{{this.title}}</div>
+    <p class="text-gray-700 text-base">
+      {{this.intro}}
+    </p>
+  </div>
+  <div class="px-6 pt-4 pb-2 flex justify-center">
+
+    <a href="/recipes/{{this.id}}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+  See Full Recipe
+</a>
+</div>
+  <div class="px-6 pt-4 pb-2">
+    {{#each this.tags}}
+      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{this}}</span>
+    {{/each}}
+  </div>
+  {{#unless isOwner}}
+  <button name="{{this.id}}" class="absolute top-0 right-0 bg-red-500 text-black font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded delete">X</button>
+  {{/unless}}
+  </div>
   {{/each}}
+</div>
+  </div>
+
 {{/if}}
 
 <script>
